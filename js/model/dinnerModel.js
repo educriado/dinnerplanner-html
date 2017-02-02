@@ -34,7 +34,7 @@ var DinnerModel = function() {
 		//TODO Lab 2
 		var allDishes = [];
 		for(key in fullMenu){
-			allDishes.push(getDish(fullMenu[key]);
+			allDishes.push(getDish(fullMenu[key]));
 		}
 		return allDishes;
 	}
@@ -370,3 +370,9 @@ var DinnerModel = function() {
 	];
 
 }
+
+var model = new DinnerModel();
+model.addDishToMenu(1);
+model.addDishToMenu(100);
+model.addDishToMenu(200);
+model.getFullMenu();
