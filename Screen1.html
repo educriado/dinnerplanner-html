@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dinner planner</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+    <!-- Adding CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+  </head>
+  <body style="height: 100vh;">
+	<div class="container" style="border: 1px solid black; width: 100%; border-bottom: 0px">
+		<h1>HOMELETTE</h1>
+		<h4>From the best chefs in the world directly into your kitchen</h3>
+	</div>
+	<div id="Screen1_1" style="border: 1px solid black; width: 80%; height: 20%; float: right; border-left: 0px;">
+		 <div style="height: 30%;">
+		 	<h4 style="margin-left: 30px;">SELECT DISH</h4>
+		 	<hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 0px; border-top: 2px solid ">
+		 </div>
+		 <div style="height: 60%">
+		 	<input type="text" class="form-control" id="selectDishSearch" placeholder="Enter Key Words" style="margin-top: 15px; margin-left: 30px; width: 20%; float: left; margin-right: 10px;">
+		 	<button id="selectDishButton" type="button" class="btn btn-outline-primary" style="margin-top: 15px; margin-right: 30px">Primary</button>
+		 	<select id="selectDishType" class="form-control" style="width: 20%; float: right; margin-top: 15px; margin-right: 300px;">
+		 		<option>Main</option>
+		 	</select>
+		 </div>
+	</div>
+	<div id="Screen1_2" style="width: 80%; height: 80%; float: right;">
+	    <div style="margin-left: 128px; margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text">
+		<img onclick="list(1)" src="images/meatballs.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
+		<b>Meatballs</b>
+		</div>
+		<div style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text">
+		<img onclick="list(2)" src="images/meatballs.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
+		<b>Meatballs</b>
+		</div>
+		<div style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text">
+		<img onclick="list(3)" src="images/meatballs.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
+		<b>Meatballs</b>
+		</div>
+		<div style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text">
+		<img onclick="list(4)" src="images/meatballs.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
+		<b>Meatballs</b>
+		</div>
+	</div>
+	<div id="Screen2" style="border: 1px solid black; border-left: 0px; width: 80%; height: 100%; float: right; display: none;">
+	    <button id="backButton" type="button" class="btn btn-outline-primary" style="float: left;">Back</button>
+	    <div style="border: 1px solid black; float: right; height: 75%; width: 50%;">
+	    	<div style="height: 10%; text-align: center;">
+		    	<h5 style="margin-left: 30px;">INGREDIENTS FOR 4 PEOPLE</h5>
+		 	    <hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 0px; border-top: 2px solid ">
+	    	</div>
+	    	<div style="height: 80%;">
+		    	<table id="ingredientTable" class="table table-hover" style="text-align: center;">
+				  <tbody>
+				  </tbody>
+				</table>
+				<hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 10px; border-top: 2px solid ">
+				<button id="confirmButton" type="button" class="btn btn-outline-primary" style="margin-left: 40px">Confirm Dish</button>
+				<p style="float: right; margin-right: 160px; margin-top: 5px;">SEK</p>
+				<p id="totalPrice" style="float: right; margin-right: -145px; margin-top: 5px;">10.00</p>
+	    	</div>
+	    </div>
+	</div>
+	<div style="border: 1px solid black; height: 100%; width: 20%;">
+	 <div style="height: 10%;">
+	 	<h3 style="padding-left: 20px; margin-top: 10px; margin-bottom: 0px;">My Dinner</h3> 
+	 </div>
+     <div style="height: 10%;">
+	 	<label id="labelNumberOfPeople" for="numberOfPeople" style="margin-left: 30px; padding-top: 5px; float: left;  margin-top: -70px;">People</label>
+        <input id="inputNumberOfPeople" type="number" class="form-control" id="numberOfPeople" value="1" style="width: 30%; float: right; margin-right: 50px;  margin-top: -70px;">
+	 </div>
+     <div style="margin-top: -25px; height: 80%;">
+      <table id="costTable" class="table">
+       <thead>
+        <tr style="background-color: #3276b1; color: #FFFFFF;">
+         <th>Dish Name</th>
+         <th>Cost</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr>
+       <th>Pending</th>
+       <th id="pendingCost">0.00</th>
+       </tr>
+       </tbody>
+      </table>
+      <hr style="margin-left: 30px; margin-right: 30px; border-top: 2px solid ">
+      <div style="text-align: right; padding-right: 35px">
+        <p id="costTablePrice">SEK 0.00</p>
+      </div>
+      <div style="padding-top: 10px; text-align: center;">
+      	<p>
+         <button id="confirmDinner" type="button" class="btn btn-outline-primary">Confirm Dinner</button>
+        </p>
+      </div>
+      </div>
+	</div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+	<!-- The application JavaScript code -->
+	<script src="js/app.js"></script>
+	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/exampleView.js"></script>
+	<script src="js/view/exampleViewController.js"></script>
+	<script src="js/view/Screen2.js"></script>
+  </body>
+</html>
