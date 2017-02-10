@@ -3,6 +3,8 @@ $(function() {
 	var model = new DinnerModel();
 	
 	//And create the needed controllers and views
-	var exampleView = new ExampleView($("#exampleView"));
-
+	//var homeView = new HomeView($("#homeView"), model);
+    var overviewContainer = document.getElementById("overviewView");
+    var overviewView = new OverviewView(overviewContainer, model);
+    //var preparationView = new PreparationView($("#preparationView"), model);
 });
