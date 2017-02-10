@@ -1,11 +1,12 @@
 //DinnerModel Object constructor
+var numberOfGuests = 4;
+var fullMenu = [];
 var DinnerModel = function() {
  
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
 
-	var numberOfGuests = 1;
-	var fullMenu = [];
+	
 
     //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
@@ -41,7 +42,7 @@ var DinnerModel = function() {
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
-		this.numberOfGuests = num;
+		numberOfGuests = num;
 
 	}
 
@@ -89,13 +90,23 @@ var DinnerModel = function() {
 		var totalMenuPrice = 0;
 		for(key in fullMenu){
 			var dish = dinnerModel1.getDish(fullMenu[key]);
-			dish.ingredients.length;
+			var length = dish.ingredients.length;
 			for(i=0;i<length;i++){
-				totalMenuPrice = parseInt(totalMenuPrice) + parseInt(dish.ingredients[i].price);
+				totalMenuPrice=parseInt(totalMenuPrice + parseInt(dish.ingredients[i].price));
 			}
 		}
-		totalMenuPrice = parseInt(totalMenuPrice) * 4;
+		totalMenuPrice = totalMenuPrice * dinnerModel1.getNumberOfGuests();
 		return totalMenuPrice;
+	}
+
+	this.getTotalPrice = function(id) {
+		var totalPrice = 0;
+		var dish = dinnerModel1.getDish(id);
+		for(key in dish.ingredients){
+			totalPrice = totalPrice + dish.ingredients[key].price;
+		}
+		totalPrice = totalPrice * dinnerModel1.getNumberOfGuests();
+		return totalPrice;
 	}
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu

@@ -1,26 +1,8 @@
 $.getScript("dinnerModel.js");
 
-//ExampleView Object constructor
-var ExampleView = function (container) {
-	
-	// Get all the relevant elements of the view (ones that show data
-  	// and/or ones that responed to interaction)
-	this.numberOfGuests = container.find("#numberOfGuests");
-	this.plusButton = container.find("#plusGuest");
-	this.minusButton = container.find("#minusGuest");
-	
-	this.numberOfGuests.html("Hello World");
-	
-}
-
 var dish;
 var totalPrice = 0;
 var dinnerModel = new DinnerModel();
-
-/*$("#meatballs").click(function(){
-	test2 = blueBox.getNumberOfGuests();
-    alert(test2);
-});*/
 
 var list = function (id){
 	$("#Screen1_1").css("display", "none");
@@ -32,10 +14,14 @@ var list = function (id){
     dish = dinnerModel.getDish(id);
     for(key in dish.ingredients){
     	$('#ingredientTable tbody').append('<tr><td>'+dish.ingredients[key].quantity+' '+dish.ingredients[key].unit+'</td><td>'+dish.ingredients[key].name+'</td><td>SEK</td><td>'+dish.ingredients[key].price+'</td></tr>');
-    	totalPrice = totalPrice + dish.ingredients[key].price;
+    	//totalPrice = totalPrice + dish.ingredients[key].price;
     } 
-    $('#totalPrice').text(totalPrice);
+    totalPrice = dinnerModel.getTotalPrice(id);
+    var numberOfGuests = dinnerModel.getNumberOfGuests();
+    $('#totalPrice').text(totalPrice/numberOfGuests);
     $('#pendingCost').text(totalPrice);
+    $("#preparation").html("");
+    $("#preparation").append(dish.description);
 }
 
 $("#backButton").click(function(){
@@ -55,11 +41,15 @@ $("#confirmButton").click(function(){
 		$("#Screen2").css("display", "none");
 		$("#labelNumberOfPeople").css("margin-top", "-70px");
 		$("#inputNumberOfPeople").css("margin-top", "-70px");
-		$('#pendingCost').text('0.00');
+		$("#costTable > tbody").html("");
+		$('#costTable tbody').append('<tr><th>'+'Pending'+'</th><th id="pendingCost">'+'0.00'+'</th></tr>');
+		
 		var fullMenu = dinnerModel.getFullMenu();
 	    var totalPrice1 = dinnerModel.getTotalMenuPrice();
-		for(key in fullMenu){
-			$('#costTable > tbody > tr:first').before('<tr><td>'+fullMenu[key].name+'</td><td>'+'0.00'+'</td></tr>');
+		for(i=0;i<fullMenu.length;i++){
+			var price = dinnerModel.getTotalPrice(fullMenu[i].id);
+			var name = fullMenu[i].name;
+			$('#costTable > tbody > tr:first').before('<tr onclick="deleteFromMenu('+fullMenu[i].id+')" ><td>'+name+'</td><td>'+price+'</td></tr>');
 		}
 	    $('#costTablePrice').text('SEK '+totalPrice1);
 	}else{
@@ -74,6 +64,53 @@ $("#confirmButton").click(function(){
 		}
 	}
     
+});
+
+$(document).on('change','#inputNumberOfPeople',function(){
+	var numberOfGuest = this.value;;
+	if(numberOfGuest < 4){
+		alert("Number of guests cannot be less than 4.");
+		$("#inputNumberOfPeople").val(4);
+	}else{
+		dinnerModel.setNumberOfGuests(numberOfGuest);
+		$("#costTable > tbody").html("");
+		$('#costTable tbody').append('<tr><th>'+'Pending'+'</th><th id="pendingCost">'+'0.00'+'</th></tr>');
+		
+		var fullMenu = dinnerModel.getFullMenu();
+	    var totalPrice1 = dinnerModel.getTotalMenuPrice();
+		for(i=0;i<fullMenu.length;i++){
+			var price = dinnerModel.getTotalPrice(fullMenu[i].id);
+			var name = fullMenu[i].name;
+			$('#costTable > tbody > tr:first').before('<tr onclick="deleteFromMenu('+fullMenu[i].id+')" ><td>'+name+'</td><td>'+price+'</td></tr>');
+		}
+	    $('#costTablePrice').text('SEK '+totalPrice1);
+	}
+	
+});
+
+var deleteFromMenu = function (id){
+	var r = confirm("Do you want to remove this dish?");
+	if (r == true) {
+	    dinnerModel.removeDishFromMenu(id);
+	    $("#costTable > tbody").html("");
+		$('#costTable tbody').append('<tr><th>'+'Pending'+'</th><th id="pendingCost">'+'0.00'+'</th></tr>');
+		
+		var fullMenu = dinnerModel.getFullMenu();
+	    var totalPrice1 = dinnerModel.getTotalMenuPrice();
+		for(i=0;i<fullMenu.length;i++){
+			var price = dinnerModel.getTotalPrice(fullMenu[i].id);
+			var name = fullMenu[i].name;
+			$('#costTable > tbody > tr:first').before('<tr onclick="deleteFromMenu('+fullMenu[i].id+')" ><td>'+name+'</td><td>'+price+'</td></tr>');
+		}
+	    $('#costTablePrice').text('SEK '+totalPrice1);
+	}
+	
+}
+
+$("#costTable > tbody > tr").hover(function(){
+    $(this).css("background-color", "pink");
+    }, function(){
+    $(this).css("background-color", "white");
 });
 
 
