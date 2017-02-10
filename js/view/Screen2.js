@@ -20,6 +20,8 @@ var list = function (id){
     var numberOfGuests = dinnerModel.getNumberOfGuests();
     $('#totalPrice').text(totalPrice/numberOfGuests);
     $('#pendingCost').text(totalPrice);
+    var src = dish.image;
+    $("#imgLocation").attr("src", 'images/'+src);
     $("#preparation").html("");
     $("#preparation").append(dish.description);
 }
@@ -100,7 +102,7 @@ var deleteFromMenu = function (id){
 		for(i=0;i<fullMenu.length;i++){
 			var price = dinnerModel.getTotalPrice(fullMenu[i].id);
 			var name = fullMenu[i].name;
-			$('#costTable > tbody > tr:first').before('<tr onclick="deleteFromMenu('+fullMenu[i].id+')" ><td>'+name+'</td><td>'+price+'</td></tr>');
+			$('#costTable > tbody > tr:first').before('<tr  onclick="deleteFromMenu('+fullMenu[i].id+')" ><td>'+name+'</td><td>'+price+'</td></tr>');
 		}
 	    $('#costTablePrice').text('SEK '+totalPrice1);
 	}
