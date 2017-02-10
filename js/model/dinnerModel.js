@@ -4,7 +4,7 @@ var DinnerModel = function() {
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
 
-	var numberOfGuests;
+	var numberOfGuests = 4;
 	var fullMenu = [];
 
 
@@ -14,11 +14,7 @@ var DinnerModel = function() {
 
 	}
 
-	// should return 
-	this.getNumberOfGuests = function() {
-		//TODO Lab 2
-		return numberOfGuests;
-	}
+	
 
 	//Returns the dish that is on the menu for selected type 
 	this.getSelectedDish = function(type) {
@@ -52,15 +48,37 @@ var DinnerModel = function() {
 		}
 	}
 
+	// Returns price of dish
+	this.getTotalPrice = function(id) {
+		var totalPrice = 0;
+		var dish = this.getDish(id);
+		console.log(dish);
+		for(key in dish.ingredients){
+			totalPrice = totalPrice + dish.ingredients[key].price;
+		}
+		totalPrice = totalPrice * this.getNumberOfGuests();
+		console.log(totalPrice);
+		return totalPrice;
+	}
+
+	// should return 
+	this.getNumberOfGuests = function() {
+		//TODO Lab 2
+		return numberOfGuests;
+	}
+
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
 	this.getTotalMenuPrice = function() {
 		//TODO Lab 2
 		var totalMenuPrice = 0;
 		for(key in fullMenu){
-			for(key in fullMenu[key].ingredients){
-				totalMenuPrice += getDish(fullMenu[key]).ingredients.price;
+			var dish = this.getDish(fullMenu[key]);
+			var length = dish.ingredients.length;
+			for(i=0;i<length;i++){
+				totalMenuPrice = parseInt(totalMenuPrice + parseInt(dish.ingredients[i].price));
 			}
 		}
+		totalMenuPrice = totalMenuPrice * this.getNumberOfGuests();
 		return totalMenuPrice;
 	}
 
@@ -73,7 +91,7 @@ var DinnerModel = function() {
 			var dishType = this.getDish(id).type;
 			for(key in fullMenu){
 				if(this.getDish(fullMenu[key]).type == dishType){
-					removeDishFromMenu(fullMenu[key]);
+					this.removeDishFromMenu(fullMenu[key]);
 					fullMenu.push(id);
 					notInFullMenu = 1;
 				}
@@ -376,6 +394,9 @@ var DinnerModel = function() {
 	];
 
 	this.addDishToMenu(1);
+	this.addDishToMenu(2);
+	this.addDishToMenu(100);
+	this.addDishToMenu(200);
 	console.log(this.getFullMenu());
 	console.log("Test");
 };

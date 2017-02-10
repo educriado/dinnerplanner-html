@@ -10,7 +10,7 @@ var OverviewView = function (container, model) {
     var menu = model.getFullMenu();
 
     var numOfDishes = menu.length;
-    var colWidth = 12 / numOfDishes;
+    var colWidth = 12 / (numOfDishes + 1);
     //console.log(menu);
     var menu_row = document.createElement("div");
     console.log(menu_row);
@@ -25,17 +25,14 @@ var OverviewView = function (container, model) {
         var name = menu[key].name;
         // Calculate price of dish, this should be moved to a model function later on
         var ingredientsLen = menu[key].ingredients.length;
-        var dishPrice = 0.0;
-        for (var i = 0; i < ingredientsLen; i++) {
-            dishPrice += menu[key].ingredients[i].price;
-        }
+        var dishPrice = model.getTotalPrice(menu[key].id);
         // Fill dish column with the data we have
         var imageO = document.createElement("img");
         imageO.setAttribute("src", image);
         var nameTextNode = document.createTextNode(name);
-        var nameO = document.createElement("p");
+        var nameO = document.createElement("h5");
         nameO.appendChild(nameTextNode);
-        var priceTextNode = document.createTextNode(dishPrice.toString());
+        var priceTextNode = document.createTextNode(dishPrice.toString() + " SEK");
         var priceO = document.createElement("p");
         priceO.appendChild(priceTextNode);
         dish_column.appendChild(imageO);
@@ -44,6 +41,19 @@ var OverviewView = function (container, model) {
         // Append column as child to row div
         menu_row.appendChild(dish_column);
     }
+    // Total menu price
+    var totalPrice = model.getTotalMenuPrice();
+    var totalPriceColumn = document.createElement("div");
+    totalPriceColumn.className = "col-md-" + colWidth;
+    var totalPriceTextNode = document.createTextNode("Total price ");
+    var mybr = document.createElement('br');
+    var totalPriceTextNodePrice = document.createTextNode(totalPrice);
+    var totalPriceO = document.createElement("p");
+    totalPriceO.appendChild(totalPriceTextNode);
+    totalPriceO.appendChild(mybr);
+    totalPriceO.appendChild(totalPriceTextNodePrice);
+    totalPriceColumn.appendChild(totalPriceO);
+    menu_row.appendChild(totalPriceColumn);
     container.appendChild(menu_row);
 }
  
