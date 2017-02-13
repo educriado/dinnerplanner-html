@@ -409,4 +409,4 @@ var DinnerModel = function() {
 	];
 
 }
-var dinnerModel1 = new DinnerModel();
+//var dinnerModel1 = new DinnerModel();
