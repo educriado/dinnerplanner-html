@@ -1,5 +1,7 @@
 $.getScript("dinnerModel.js");
 
+
+
 var dish;
 var totalPrice = 0;
 var dinnerModel = new DinnerModel();

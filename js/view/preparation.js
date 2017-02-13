@@ -6,6 +6,7 @@ var PreparationView = function (container, model) {
     
     console.log(container);
     var menu = model.getFullMenu();
+    container = document.getElementById("preparationView");
 
     for(key in menu) {
 

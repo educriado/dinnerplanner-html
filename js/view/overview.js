@@ -1,6 +1,8 @@
 //ExampleView Object constructor
 var OverviewView = function (container, model) {
     
+    model.addDishToMenu(1);
+    model.addDishToMenu(100);
     // Get all the relevant elements of the view (ones that show data
     // and/or ones that responed to interaction)
     console.log(container);
