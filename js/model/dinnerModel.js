@@ -1,12 +1,14 @@
 //DinnerModel Object constructor
-var numberOfGuests = 4;
-var fullMenu = [];
+
 var DinnerModel = function() {
+
+	this.numberOfGuests = 4;
+	this.fullMenu = [];
  
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
 
-    //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
+	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the dishes will be returned
 	this.getAllDishes = function (type,filter) {
@@ -24,7 +26,7 @@ var DinnerModel = function() {
 				found = true;
 			}
 		}
-	  	return dish.type == type && found;
+		return dish.type == type && found;
 	  });	
 	}
 
@@ -40,7 +42,7 @@ var DinnerModel = function() {
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
-		numberOfGuests = num;
+		this.numberOfGuests = num;
 
 	}
 
@@ -49,9 +51,9 @@ var DinnerModel = function() {
 	//Returns the dish that is on the menu for selected type 
 	this.getSelectedDish = function(type) {
 		//TODO Lab 2
-		for(key in fullMenu){
-			if(this.getDish(fullMenu[key]).type === type)
-				return getDish(fullMenu[key]);
+		for(key in this.fullMenu){
+			if(this.getDish(this.fullMenu[key]).type === type)
+				return getDish(this.fullMenu[key]);
 		}
 	}
 
@@ -59,8 +61,8 @@ var DinnerModel = function() {
 	this.getFullMenu = function() {
 		//TODO Lab 2
 		var allDishes = [];
-		for(key in fullMenu){
-			allDishes.push(dinnerModel1.getDish(fullMenu[key]));
+		for(key in this.fullMenu){
+			allDishes.push(dinnerModel1.getDish(this.fullMenu[key]));
 		}
 		return allDishes;
 	}
@@ -69,10 +71,10 @@ var DinnerModel = function() {
 	this.getAllIngredients = function() {
 		//TODO Lab 2
 		var listOfAllIngredients = [];
-		for(key in fullMenu){
+		for(key in this.fullMenu){
 			var ingrdientForDish = [];
-			for(key in fullMenu[key].ingredients){
-				ingrdientForDish.push(fullMenu[key].ingredients.name);
+			for(key in this.fullMenu[key].ingredients){
+				ingrdientForDish.push(this.fullMenu[key].ingredients.name);
 			}
 			listOfAllIngredients.push(ingrdientForDish);
 		}
@@ -101,8 +103,8 @@ var DinnerModel = function() {
 	this.getTotalMenuPrice = function() {
 		//TODO Lab 2
 		var totalMenuPrice = 0;
-		for(key in fullMenu){
-			var dish = dinnerModel1.getDish(fullMenu[key]);
+		for(key in this.fullMenu){
+			var dish = dinnerModel1.getDish(this.fullMenu[key]);
 			var length = dish.ingredients.length;
 			for(i=0;i<length;i++){
 				totalMenuPrice=parseInt(totalMenuPrice + parseInt(dish.ingredients[i].price));
@@ -126,20 +128,20 @@ var DinnerModel = function() {
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
-		if( fullMenu.indexOf(id) === -1 ){
+		if(this.fullMenu.indexOf(id) === -1 ){
 			var dishType = dinnerModel1.getDish(id).type;
-			if(fullMenu.length > 0){
-				for(key in fullMenu){
-				if(dinnerModel1.getDish(fullMenu[key]).type === dishType){
-					dinnerModel1.removeDishFromMenu(fullMenu[key]);
-					fullMenu.push(id);
+			if(this.fullMenu.length > 0){
+				for(key in this.fullMenu){
+				if(dinnerModel1.getDish(this.fullMenu[key]).type === dishType){
+					dinnerModel1.removeDishFromMenu(this.fullMenu[key]);
+					this.fullMenu.push(id);
 					return 1;
 				}
 				}
-			    fullMenu.push(id);
-			    return 1;
+				this.fullMenu.push(id);
+				return 1;
 				}else{
-					fullMenu.push(id);
+					this.fullMenu.push(id);
 					return 1;
 				}
 				
@@ -151,8 +153,8 @@ var DinnerModel = function() {
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
 		//TODO Lab 2
-		var index = fullMenu.indexOf(id);
-		fullMenu.splice(index,1);
+		var index = this.fullMenu.indexOf(id);
+		this.fullMenu.splice(index,1);
 	}
 
 	// the dishes variable contains an array of all the 
