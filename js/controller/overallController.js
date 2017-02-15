@@ -1,6 +1,6 @@
 var OverallController = function (document) {
     // Identifiers of every screen in correct order
-    var screens = ["home-screen", "select-dish-screen", "dish-screen", "overview-screen", "preparation-screen"];
+    var screens = ["home-screen", "overview-screen", "dish-screen", "overview-screen", "preparation-screen"];
     var currentScreen = 0;
     
     this.init = function () {
