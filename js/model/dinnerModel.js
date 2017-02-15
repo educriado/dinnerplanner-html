@@ -4,6 +4,7 @@ var DinnerModel = function() {
 
 	this.numberOfGuests = 4;
 	this.fullMenu = [];
+	this.observers = [];
  
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
@@ -11,6 +12,17 @@ var DinnerModel = function() {
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
 	//you can use the filter argument to filter out the dish by name or ingredient (use for search)
 	//if you don't pass any filter all the dishes will be returned
+
+	this.addObserver = function(observer) {
+		observers.push(observer);
+	}
+
+	this.notifyObservers = function(obj) {
+		for(key in this.observers) {
+			this.observers[key].update();
+		}
+	}
+
 	this.getAllDishes = function (type,filter) {
 	  return dishes.filter(function(dish) {
 		var found = true;
@@ -43,7 +55,7 @@ var DinnerModel = function() {
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
 		this.numberOfGuests = num;
-
+		this.notifyObservers();
 	}
 
 	
@@ -135,17 +147,21 @@ var DinnerModel = function() {
 				if(dinnerModel1.getDish(this.fullMenu[key]).type === dishType){
 					dinnerModel1.removeDishFromMenu(this.fullMenu[key]);
 					this.fullMenu.push(id);
+					this.notifyObservers();
 					return 1;
 				}
 				}
 				this.fullMenu.push(id);
+				this.notifyObservers();				
 				return 1;
 				}else{
 					this.fullMenu.push(id);
+					this.notifyObservers();
 					return 1;
 				}
 				
 		}else{
+			this.notifyObservers();
 			return 0;
 		}
 	}
@@ -155,6 +171,7 @@ var DinnerModel = function() {
 		//TODO Lab 2
 		var index = this.fullMenu.indexOf(id);
 		this.fullMenu.splice(index,1);
+		this.notifyObservers();
 	}
 
 	// the dishes variable contains an array of all the 
