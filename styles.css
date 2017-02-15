@@ -23,3 +23,7 @@
     background-color: #3276b1;
     color: #FFFFFF;
 }
+
+tr:hover{
+	background-color: pink;
+}
