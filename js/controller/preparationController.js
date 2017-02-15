@@ -1,4 +1,4 @@
-var PreparationController = function (preparationView, model) {
+var PreparationController = function (preparationView, model, overallController) {
     "use strict";
     
 };
