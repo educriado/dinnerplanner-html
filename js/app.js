@@ -4,8 +4,8 @@ $(function () {
     var model = new DinnerModel();
 
     // Create the needed views
-    var overviewContainer = document.getElementById("overviewView");
-    var overviewView = new OverviewView(overviewContainer, model);
+    //var overviewContainer = document.getElementById("overview-screen");
+    var overviewView = new OverviewView($("overview-screen"), model);
     var preparationContainer = document.getElementById("preparationView");
     var preparationView = new PreparationView(preparationContainer, model);
 
