@@ -5,7 +5,7 @@ $(function () {
 
     // Create the needed views
     //var overviewContainer = document.getElementById("overview-screen");
-    var overviewView = new OverviewView($("overview-screen"), model);
+    var overviewView = new OverviewView($("#overview-screen"), model);
     var preparationContainer = document.getElementById("preparationView");
     var preparationView = new PreparationView(preparationContainer, model);
 

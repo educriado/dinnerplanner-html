@@ -1,15 +1,17 @@
 //ExampleView Object constructor
 var OverviewView = function (container, model) {
+
+    // Add ourselves as observer of the model
+    model.addObserver(this);
     
-    model.addDishToMenu(1);
-    model.addDishToMenu(100);
     // Get all the relevant elements of the view (ones that show data
     // and/or ones that responed to interaction)
-    console.log(container);
-    this.dishesOverview = container;
+    //console.log(container);
+    this.goBackButton = container.find("#go-back-button");
+    this.printFullRecipeButton = container.find("#print-full-recipe-button");
     // Populate the menu overview with the elements from the model
-    
-    var menu = model.getFullMenu();
+
+    /*var menu = model.getFullMenu();
 
     var numOfDishes = menu.length;
     var colWidth = 12 / (numOfDishes + 1);
@@ -18,7 +20,7 @@ var OverviewView = function (container, model) {
     console.log(menu_row);
     menu_row.className = "row";
     console.log("Constructor is called.");
-    for(key in menu) {
+    for (key in menu) {
         console.log("Inside for loop.");
         var dish_column = document.createElement("div");
         dish_column.className = "col-md-" + colWidth;
@@ -56,6 +58,5 @@ var OverviewView = function (container, model) {
     totalPriceO.appendChild(totalPriceTextNodePrice);
     totalPriceColumn.appendChild(totalPriceO);
     menu_row.appendChild(totalPriceColumn);
-    container.appendChild(menu_row);
-}
- 
+    container.appendChild(menu_row);*/
+};

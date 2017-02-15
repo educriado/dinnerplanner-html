@@ -1,11 +1,11 @@
 var OverviewController = function (overviewView, model, overallController) {
     "use strict";
     
-    overviewView.goBackButton.addEventListener("click", function () {
+    overviewView.goBackButton.click(function () {
         overallController.previusStep();
     });
     
-    overviewView.printFullRecipeButton.addEventListener("click", function () {
+    overviewView.printFullRecipeButton.click(function () {
         overallController.nextStep();
     });
 };

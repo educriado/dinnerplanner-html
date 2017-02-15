@@ -7,21 +7,22 @@ var OverallController = function (document) {
         // Display only home screen and hide everything else
         var i;
         for (i = 1; i < screens.length; i++) {
-            document.getElementById(screens[i]).style.display = "none";
+            $("#" + screens[i]).hide();
+            //document.getElementById(screens[i]).style.display = "none";
         }
     };
     
     this.nextStep = function () {
         // Hide current screen and show next one
-        document.getElementById(screens[currentScreen]).style.display = "none";
-        document.getElementById(screens[currentScreen + 1]).style.display = "block";
+        $("#" + screens[currentScreen]).hide();
+        $("#" + screens[currentScreen + 1]).show();
         currentScreen++;
     };
     
     this.previusStep = function () {
         // Hide current screen and show previous one
-        document.getElementById(screens[currentScreen]).style.display = "none";
-        document.getElementById(screens[currentScreen - 1]).style.display = "block";
+        $("#" + screens[currentScreen]).hide();
+        $("#" + screens[currentScreen - 1]).show();
         currentScreen--;
     };
 };

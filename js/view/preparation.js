@@ -1,14 +1,16 @@
 //ExampleView Object constructor
 var PreparationView = function (container, model) {
-    
+
+    // Add ourselves as observer of the model
+    model.addObserver(this);
     // Get all the relevant elements of the view (ones that show data
     // and/or ones that responed to interaction)
-    
+
     console.log(container);
     var menu = model.getFullMenu();
     container = document.getElementById("preparationView");
 
-    for(key in menu) {
+    for (key in menu) {
 
         // Create row
         var dishRow = document.createElement("div");
@@ -52,4 +54,3 @@ var PreparationView = function (container, model) {
         container.appendChild(dishRow);
     }
 }
- 
