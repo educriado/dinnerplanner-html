@@ -44,7 +44,11 @@ var PreparationView = function (container, model) {
                 nameColumn = $("<div />", {
                 "class": "col-md-4"
                 });
-            nameColumn.append(nameO, descriptionO);
+            // Don't know why this wasn't working with descriptionO
+            // and it works now with descriptionNameO
+            var descriptionNameO = $("<p> " + description + "</p>");
+            nameColumn.append(nameO, descriptionNameO);
+            console.log(nameColumn);
             
             var preparationO = $("<h3>Preparation</h3>"),
                 preparationColumn = $("<div />", {

@@ -50,7 +50,15 @@ var OverviewView = function (container, model) {
         }
 
         // Total menu price info
-
+        var totalPrice = model.getTotalMenuPrice();
+        var totalPriceColumn = $("<div />", {
+                "class": "col-md-" + colWidth,
+                "id": "total-price-column"
+            });
+        var totalPriceText = $("<h5>Total price</h5><p>" + totalPrice + "</p>");
+        totalPriceColumn.append(totalPriceText);
+        menuRow.append(totalPriceColumn);
+        
         // Append elements to container (parent)
         container.find("#overview-dynamic-content").after(menuRow);
     };
