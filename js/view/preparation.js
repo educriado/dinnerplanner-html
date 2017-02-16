@@ -32,11 +32,12 @@ var PreparationView = function (container, model) {
             
             // Fill info
             
-            var img0 = $("<img />"),
+            var imgO = $("<img />"),
                 imgColumn = $("<div />", {
                 "class": "col-md-2"
                 });
-            imgColumn.append(img0);
+            imgO.attr("src", image);
+            imgColumn.append(imgO);
             
             var nameO = $("<h3>" + name + "</h3>"),
                 descriptionO = $("<p>" + description + "</p>"),
