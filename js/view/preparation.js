@@ -1,18 +1,73 @@
 //ExampleView Object constructor
 var PreparationView = function (container, model) {
-
-    // Add ourselves as observer of the model
-    model.addObserver(this);
+    "use strict";
+    
     // Get all the relevant elements of the view (ones that show data
     // and/or ones that responed to interaction)
-
-    //console.log(container);
+    this.goBackButton = container.find("#go-back-button");
+    this.numberOfGuests = container.find("#people-attending-dinner");
+    
+    this.update = function () {
+        console.log("PreparationView: this.update() function gets executed");
+        
+        // Empty previous content
+        container.find("#preparation-dynamic-content").empty();
+        
+        // Start with new content
+        this.numberOfGuests.text("My Dinner: " + model.getNumberOfGuests() + " people");
+        
+        var menu = model.getFullMenu();
+        
+        // Create one row for each dish, with 3 columns for
+        // image, name + description, preparation
+        for (var i = 0; i < menu.length; i++) {
+            var dishRow = $("<div />", {
+                "class": "row"
+            });
+            
+            // Dish info
+            var image = "images/" + menu[i].image,
+                name = menu[i].name,
+                description = menu[i].description;
+            
+            // Fill info
+            
+            var img0 = $("<img />"),
+                imgColumn = $("<div />", {
+                "class": "col-md-2"
+                });
+            imgColumn.append(img0);
+            
+            var nameO = $("<h3>" + name + "</h3>"),
+                descriptionO = $("<p>" + description + "</p>"),
+                nameColumn = $("<div />", {
+                "class": "col-md-4"
+                });
+            nameColumn.append(nameO, descriptionO);
+            
+            var preparationO = $("<h3>Preparation</h3>"),
+                preparationColumn = $("<div />", {
+                "class": "col-md-6"
+                });
+            preparationColumn.append(preparationO, descriptionO);
+            
+            dishRow.append(imgColumn, nameColumn, preparationColumn);
+            container.find("#preparation-dynamic-content").append(dishRow);
+        }
+        
+    };
+    
+    // Add ourselves as observer of the model
+    model.addObserver(this);
+    
+    // Initial population (for the dinner guests)
+    this.update();
+    
+    /*//console.log(container);
     var menu = model.getFullMenu();
     container = document.getElementById("preparationView");
     
-    this.update = function () {
-        
-    };
+    
 
     for (key in menu) {
 
@@ -56,5 +111,5 @@ var PreparationView = function (container, model) {
         dishRow.appendChild(nameColumn);
         dishRow.appendChild(preparationColumn);
         container.appendChild(dishRow);
-    }
-}
+    }*/
+};

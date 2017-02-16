@@ -8,7 +8,7 @@ var OverviewView = function (container, model) {
     this.goBackButton = container.find("#go-back-button");
     this.printFullRecipeButton = container.find("#print-full-recipe-button");
     this.numberOfGuests = container.find("#people-attending-dinner");
-    console.log(this.numberOfGuests);
+    //console.log(this.numberOfGuests);
     
     // Update function called when notified by the model
     this.update = function () {
@@ -29,7 +29,7 @@ var OverviewView = function (container, model) {
         });
 
         for (var i = 0; i < menu.length; i++) {
-            console.log("For loop iteration number:" + i);
+            //console.log("For loop iteration number:" + i);
             // Dish info
             var image = "images/" + menu[i].image,
                 name = menu[i].name,
