@@ -52,7 +52,7 @@ var PreparationView = function (container, model) {
             preparationColumn.append(preparationO, descriptionO);
             
             dishRow.append(imgColumn, nameColumn, preparationColumn);
-            container.find("#preparation-dynamic-content").append(dishRow);
+            container.find("#preparation-dynamic-content").after(dishRow);
         }
         
     };

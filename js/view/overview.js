@@ -2,25 +2,25 @@
 var OverviewView = function (container, model) {
 
     "use strict";
-    
+
     // Get all the relevant elements of the view (ones that show data
     // and/or ones that responed to interaction)
     this.goBackButton = container.find("#go-back-button");
     this.printFullRecipeButton = container.find("#print-full-recipe-button");
     this.numberOfGuests = container.find("#people-attending-dinner");
     //console.log(this.numberOfGuests);
-    
+
     // Update function called when notified by the model
     this.update = function () {
         console.log("OverviewView: this.update() function gets executed.");
-        
+
         // Empty previous content
         container.find("#overview-dynamic-content").empty();
-        
+
         // Start with new content
         this.numberOfGuests.text("My Dinner: " + model.getNumberOfGuests() + " people");
         var menu = model.getFullMenu();
-        
+
         // Divide the 12 column grid in Bootstrap in columns depending
         // on the number of dishes
         var colWidth = 12 / (menu.length + 1);
@@ -54,10 +54,10 @@ var OverviewView = function (container, model) {
         // Append elements to container (parent)
         container.find("#overview-dynamic-content").after(menuRow);
     };
-    
+
     // Add ourselves as observer of the model
     model.addObserver(this);
-    
+
     // Populate the menu overview with the elements from the model
     this.update();
 
