@@ -7,6 +7,7 @@ $(function () {
     //var overviewContainer = document.getElementById("overview-screen");
     var homeView = new HomeView($("#home-screen"));
     var overviewView = new OverviewView($("#overview-screen"), model);
+    // TODO Change preparationView to JQuery
     var preparationContainer = document.getElementById("preparationView");
     var preparationView = new PreparationView(preparationContainer, model);
 

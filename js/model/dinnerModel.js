@@ -4,7 +4,7 @@ var DinnerModel = function () {
 
     "use strict";
     this.numberOfGuests = 4;
-    this.fullMenu = [];
+    this.fullMenu = [1, 100];
     this.observers = [];
 
     //TODO Lab 2 implement the data structure that will hold number of guest
@@ -21,6 +21,7 @@ var DinnerModel = function () {
     this.notifyObservers = function (obj) {
         var key;
         for (key in this.observers) {
+            //console.log(this.observers[key]);
             this.observers[key].update();
         }
     };
@@ -144,7 +145,8 @@ var DinnerModel = function () {
     //Adds the passed dish to the menu. If the dish of that type already exists on the menu
     //it is removed from the menu and the new one added.
     this.addDishToMenu = function (id) {
-        //TODO Lab 2 
+        //TODO Lab 2
+        console.log("Added dish:" + id);
         var key;
         if (this.fullMenu.indexOf(id) === -1) {
             var dishType = this.getDish(id).type;

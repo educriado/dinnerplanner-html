@@ -65,7 +65,7 @@ var DinnerModel = function() {
 	this.getNumberOfGuests = function() {
 		//TODO Lab 2
 		return numberOfGuests;
-	}
+	};
 
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
 	this.getTotalMenuPrice = function() {
