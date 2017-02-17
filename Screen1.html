@@ -14,86 +14,64 @@
 
   </head>
   <body style="height: 100vh;">
+
 	<div class="container" style="border: 1px solid black; width: 100%; border-bottom: 0px">
 		<h1>HOMELETTE</h1>
 		<h4>From the best chefs in the world directly into your kitchen</h3>
 	</div>
-	<div id="Screen1_1" style="border: 1px solid black; width: 80%; height: 20%; float: right; border-left: 0px;">
-		 <div style="height: 30%;">
-		 	<h4 style="margin-left: 30px;">SELECT DISH</h4>
-		 	<hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 0px; border-top: 2px solid ">
-		 </div>
-		 <div style="height: 60%">
-		 	<select onchange="list(this.value)" type="text" class="form-control" id="selectDishSearch" style="margin-top: 15px; margin-left: 30px; width: 20%; float: left; margin-right: 10px;">
-		 	<option selected>Select</option>
-		 	<option value="1">French Toast</option>
-		 	<option value="2">Sourdough Starter</option>
-		 	<option value="3">Baked Brie with Peaches</option>
-		 	<option value="100">Meat Balls</option>
-		 	<option value="101">MD 2</option>
-		 	<option value="102">MD 3</option>
-		 	<option value="103">MD 4</option>
-		 	<option value="201">Chocolat Ice cream</option>
-		 	<option value="202">Vanilla Ice cream</option>
-		 	<option value="203">Strawberry</option>
-		 	</select>
-		 	<button id="selectDishButton" type="button" class="btn btn-outline-primary" style="margin-top: 15px; margin-right: 30px">Search</button>
-		 </div>
-	</div>
-	<div id="Screen1_2" style="width: 80%; height: 80%; float: right;">
-	    <div style="margin-left: 128px; margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text">
-		<img onclick="list(1)" src="images/toast.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
-		<b>French Toast</b>
+
+
+	<div id="dishView" style="border: 1px solid black; border-left: 0px; width: 80%; height: 100%; float: right;">
+		<div id="dishViewSelect" style="border: 1px solid black; width: 100%; height: 20%; float: right; border-left: 0px;">
+		  <div style="height: 30%;">
+			 	<h4 style="margin-left: 30px;">SELECT DISH</h4>
+			 	<hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 0px; border-top: 2px solid ">
+		  </div>
+		  <div style="height: 60%">
+			 	<select onchange="list(this.value)" type="text" class="form-control" id="selectDishSearch" style="margin-top: 15px; margin-left: 30px; width: 20%; float: left; margin-right: 10px;">
+			 	</select>
+			 	<button id="selectDishButton" type="button" class="btn btn-outline-primary" style="margin-top: 15px; margin-right: 30px">Search</button>
+		  </div>
 		</div>
-		<div style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text">
-		<img onclick="list(2)" src="images/sourdough.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
-		<b>Sourdough Starter</b>
+		<div id="dishViewImage" style="width: 100%; height: 80%; float: right;">
 		</div>
-		<div style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text">
-		<img onclick="list(3)" src="images/bakedbrie.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
-		<b>Baked Brie with Peaches</b>
-		</div>
-		<div style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text">
-		<img onclick="list(100)" src="images/meatballs.jpg" alt="HTML5 Icon" style="width:128px;height:128px;">
-		<b>Meat balls</b>
-		</div>
-	</div>
-	<div id="Screen2" style="border: 1px solid black; border-left: 0px; width: 80%; height: 100%; float: right; display: none;">
-	    
-	    <div style="float: left; min-height: 75%; width: 50%; overflow: hidden;">
-	    	<div style="height: 20%; width: 100%;">
-	    	   <button id="backButton" type="button" class="btn btn-outline-primary" style="float: left; margin-left: 30px; margin-top: 20px; width: 100px;">Back</button>
-	    	</div>
-	    	<div style="height: 80%; width: 100%;">
-	    	    <img id="imgLocation" alt="HTML5 Icon" style="margin-top: 75px; margin-left: -115px; width:128px;height:128px;">
-	    		<h4 style="float: left; margin-left: 30px; margin-top: 250px;">Preparation :-</h4>
-	    		<h5 id="preparation" style="float: left; margin-left: 30px; margin-top: 15px; text-align: left;">Test</h5>
-	    	</div>
-	    </div>
-	    <div style="border: 1px solid black; float: right; min-height: 75%; width: 50%; overflow: hidden;">
-	    	<div style="height: 10%; text-align: center;">
-		    	<h5 style="margin-left: 30px;">INGREDIENTS FOR 1 PERSON</h5>
-		 	    <hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 0px; border-top: 2px solid ">
-	    	</div>
-	    	<div style="height: 80%;">
-		    	<table id="ingredientTable" class="table table-hover" style="text-align: center;">
-				  <tbody>
-				  </tbody>
-				</table>
-				<hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 10px; border-top: 2px solid ">
-				<button id="confirmButton" type="button" class="btn btn-outline-primary" style="margin-left: 40px">Confirm Dish</button>
-				<p style="float: right; margin-right: 160px; margin-top: 5px;">SEK</p>
-				<p id="totalPrice" style="float: right; margin-right: -145px; margin-top: 5px;">10.00</p>
-	    	</div>
+		<div id="listScreen" style="border: 1px solid black; border-left: 0px; width: 100%; height: 100%; float: right;">
+		    <div style="float: left; min-height: 75%; width: 50%; overflow: hidden;">
+		    	<div style="height: 20%; width: 100%;">
+		    	   <button id="backButton" type="button" class="btn btn-outline-primary" style="float: left; margin-left: 30px; margin-top: 20px; width: 100px;">Back</button>
+		    	</div>
+		    	<div style="height: 80%; width: 100%;">
+		    	    <img id="imgLocation" alt="HTML5 Icon" style="margin-top: 75px; margin-left: -115px; width:128px;height:128px;">
+		    		<h4 style="float: left; margin-left: 30px; margin-top: 250px;">Preparation :-</h4>
+		    		<h5 id="preparation" style="float: left; margin-left: 30px; margin-top: 15px; text-align: left;">Test</h5>
+		    	</div>
+		    </div>
+		    <div id="ingredientDiv" style="border: 1px solid black; float: right; min-height: 75%; width: 50%; overflow: hidden;">
+		    	<div style="height: 10%; text-align: center;">
+			    	<h5 style="margin-left: 30px;">INGREDIENTS FOR 1 PERSON</h5>
+			 	    <hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 0px; border-top: 2px solid ">
+		    	</div>
+		    	<div id="ingredientTableDiv" style="height: 80%;">
+			    	<table id="ingredientTable" class="table table-hover" style="text-align: center;">
+					  <tbody>
+					  </tbody>
+					</table>
+					<hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 10px; border-top: 2px solid ">
+					<button type="button" class="btn btn-outline-primary" style="margin-left: 40px">Confirm Dish</button>
+					<p style="float: right; margin-right: 160px; margin-top: 5px;">SEK</p>
+					<p id="totalPrice" style="float: right; margin-right: -145px; margin-top: 5px;">10.00</p>
+		    	</div>
+		    </div>
 	    </div>
 	</div>
-	<div style="border: 1px solid black; height: 100%; width: 20%;">
+	
+	<div id="leftMenu" style="border: 1px solid black; height: 100%; width: 20%;">
 	 <div style="height: 10%;">
 	 	<h3 style="padding-left: 20px; margin-top: 10px; margin-bottom: 0px;">My Dinner</h3> 
 	 </div>
      <div style="height: 10%;">
-	 	<label id="labelNumberOfPeople" for="inputNumberOfPeople" style="margin-left: 30px; padding-top: 5px; float: left;  margin-top: -70px;">People</label>
-        <input id="inputNumberOfPeople" type="number" value="4" class="form-control" style="width: 30%; float: right; margin-right: 50px;  margin-top: -70px;">
+	 	<label id="labelNumberOfPeople" for="inputNumberOfPeople" style="margin-left: 30px; padding-top: 5px; float: left;  margin-top: -8px;">People</label>
+        <input id="inputNumberOfPeople" type="number" value="4" class="form-control" style="width: 30%; float: right; margin-right: 50px;  margin-top: -8px;">
 	 </div>
      <div style="margin-top: -25px; height: 80%;">
       <table id="costTable" class="table">
@@ -133,5 +111,9 @@
 	<script src="js/view/exampleView.js"></script>
     <script src="js/view/overview.js"></script>
 	<script src="js/view/Screen2.js"></script>
+	<script src="js/view/dishView.js"></script>
+	<script src="js/controller/dishViewController.js"></script>
+	<script src="js/view/leftMenu.js"></script>
+	<script src="js/controller/leftMenuController.js"></script>
   </body>
 </html>

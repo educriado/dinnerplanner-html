@@ -6,7 +6,7 @@ var dish;
 var totalPrice = 0;
 var dinnerModel = new DinnerModel();
 
-var list = function (id){
+/*var list = function (id){
 	$("#Screen1_1").css("display", "none");
 	$("#Screen1_2").css("display", "none");
 	$("#Screen2").css("display", "");
@@ -26,18 +26,18 @@ var list = function (id){
     $("#imgLocation").attr("src", 'images/'+src);
     $("#preparation").html("");
     $("#preparation").append(dish.description);
-}
+}*/
 
-$("#backButton").click(function(){
+/*$("#backButton").click(function(){
 	$("#Screen1_1").css("display", "");
 	$("#Screen1_2").css("display", "");
 	$("#Screen2").css("display", "none");
 	$("#labelNumberOfPeople").css("margin-top", "-70px");
 	$("#inputNumberOfPeople").css("margin-top", "-70px");
 	$('#pendingCost').text('0.00');
-});
+});*/
 
-$("#confirmButton").click(function(){
+/*$("#confirmButton").click(function(){
 	var addDish = dinnerModel.addDishToMenu(dish.id);
 	if(addDish === 1){
 		$("#Screen1_1").css("display", "");
@@ -68,9 +68,9 @@ $("#confirmButton").click(function(){
 		}
 	}
     
-});
+});*/
 
-$(document).on('change','#inputNumberOfPeople',function(){
+/*$(document).on('change','#inputNumberOfPeople',function(){
 	var numberOfGuest = this.value;;
 	if(numberOfGuest < 4){
 		alert("Number of guests cannot be less than 4.");
@@ -90,7 +90,7 @@ $(document).on('change','#inputNumberOfPeople',function(){
 	    $('#costTablePrice').text('SEK '+totalPrice1);
 	}
 	
-});
+});*/
 
 var deleteFromMenu = function (id){
 	var r = confirm("Do you want to remove this dish?");
