@@ -1,8 +1,9 @@
-body {
-    background-image: url("images/dinner-background.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    height: 100%;
+
+.page-header {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.row {
+    margin-left: 1%;
 }

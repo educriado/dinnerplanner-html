@@ -9,6 +9,10 @@ var PreparationView = function (container, model) {
     //console.log(container);
     var menu = model.getFullMenu();
     container = document.getElementById("preparationView");
+    
+    this.update = function () {
+        
+    };
 
     for (key in menu) {
 

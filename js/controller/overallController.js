@@ -1,5 +1,6 @@
 var OverallController = function (document) {
     // Identifiers of every screen in correct order
+    // TODO change this to correct screen order when Arhram has his html code
     var screens = ["home-screen", "overview-screen", "dish-screen", "overview-screen", "preparation-screen"];
     var currentScreen = 0;
     
@@ -8,7 +9,6 @@ var OverallController = function (document) {
         var i;
         for (i = 1; i < screens.length; i++) {
             $("#" + screens[i]).hide();
-            //document.getElementById(screens[i]).style.display = "none";
         }
     };
     
@@ -17,6 +17,7 @@ var OverallController = function (document) {
         $("#" + screens[currentScreen]).hide();
         $("#" + screens[currentScreen + 1]).show();
         currentScreen++;
+        console.log("OverallController: showing '" + screens[currentScreen] + "' screen.");
     };
     
     this.previusStep = function () {
