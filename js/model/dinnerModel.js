@@ -4,7 +4,7 @@ var DinnerModel = function () {
 
     "use strict";
     this.numberOfGuests = 4;
-    this.fullMenu = [];
+    this.fullMenu = [1, 100];
     this.observers = [];
 
     //TODO Lab 2 implement the data structure that will hold number of guest
