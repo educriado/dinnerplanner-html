@@ -1,8 +1,8 @@
-var DishViewController = function (view, model) {
+var DishViewController = function (view, model, overallController) {
 
-	this.dishViewImage = view.find("#dishViewImage");
-	this.dishViewSelect = view.find("#dishViewSelect");
-	this.dishViewDetail = view.find("#listScreen");
+	this.dishViewImage = view.dishView;
+	this.dishViewSelect = view.dishViewSelect;
+	this.dishViewDetail = view.dishViewDetail;
   	this.ingredientDiv = this.dishViewDetail.find("#ingredientDiv");
 	this.ingredientTableDiv = this.dishViewDetail.find("#ingredientTableDiv");
 	this.ingredientTable = this.ingredientTableDiv.find("#ingredientTable")
@@ -14,16 +14,15 @@ var DishViewController = function (view, model) {
     for(key in array){
     	this.dish = this.dishViewImage.find("#"+array[key]);
 		this.dish.click(function(){
-			getDishDetail(this.id);
-
+            model.setCurrentSelectedDish(this.id);
+			overallController.showDishDetails(this.id);
 		});
     }
 
-    function getDishDetail(id) {
-    	$("#listScreen").show();
-		$(this.dishViewImage).hide();
-    	$(this.dishViewSelect).hide();
-    	this.dishViewDetail = view.find("#listScreen");
+    /*function getDishDetail(id) {
+    	overallController.showDishDetails(id);
+        model.setCurrentSelectedDish(id);
+    	/*this.dishViewDetail = view.find("#listScreen");
         var dish = model.getDish(id);
         $("#"+this.ingredientTable.id+" > tbody").html("");
 		for(key in dish.ingredients){
@@ -39,9 +38,9 @@ var DishViewController = function (view, model) {
 		$(this.dishViewDetail.find('#preparation')).append(dish.description);
 		$(".btn-outline-primary").prop("id", id);
 		
-    }
+    }*/
 
-    this.backButton = this.dishViewDetail.find("#backButton");
+   /* this.backButton = this.dishViewDetail.find("#backButton");
     this.backButton.click(function(){
     	this.dishViewImage = view.find("#dishViewImage");
 		this.dishViewSelect = view.find("#dishViewSelect");
@@ -73,6 +72,6 @@ var DishViewController = function (view, model) {
 				}
 			}
 	});
-
+*/
 	
 }

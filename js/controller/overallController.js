@@ -1,6 +1,6 @@
-var OverallController = function (document) {
+var OverallController = function () {
     // Identifiers of every screen in correct order
-    // TODO change this to correct screen order when Arhram has his html code
+    // TODO add the behaviour to show or hide elements in the select dish view
     "use strict";
     var screens = ["home-screen", "select-dish-screen", "overview-screen", "preparation-screen"];
     var currentScreen = 0;
@@ -11,6 +11,31 @@ var OverallController = function (document) {
         for (i = 1; i < screens.length; i++) {
             $("#" + screens[i]).hide();
         }
+    };
+    
+    this.showSelectDish = function () {
+        $("#home-screen").hide();
+        $("#dishView").show();
+        $("#leftMenu").show();
+    };
+    
+    this.showDishDetails = function (id) {
+        
+        $("#listScreen").show();
+        $("#dishView").hide();
+    };
+    
+    this.backButton = function () {
+        
+        $("#listScreen").hide();
+        $("#dishView").show();
+    };
+    
+    this.showDinnerOverview = function() {
+        $("#listScreen").hide();
+        $("#dishView").hide();
+        $("#leftMenu").hide();
+        $("#overview-screen").show();
     };
     
     this.nextStep = function () {

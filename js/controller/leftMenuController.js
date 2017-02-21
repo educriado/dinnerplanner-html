@@ -37,7 +37,7 @@ var LeftMenuController = function (view, model, overallController) {
     	}
 	});
     
-    $("#confirmDinner").click(function () {
-        overallController.nextStep();
+    view.confirmDinnerButton.click(function () {
+        overallController.showDinnerOverview();
     });
 }
