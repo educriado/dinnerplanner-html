@@ -1,4 +1,4 @@
-var LeftMenuController = function (view, model) {
+var LeftMenuController = function (view, model, overallController) {
 
 	this.getdish = function () {
         var result = [];
@@ -9,7 +9,7 @@ var LeftMenuController = function (view, model) {
 	    
 		for(i=0;i<fullMenu.length;i++){
 			id.push(fullMenu[i].id);
-			price.push(dinnerModel.getTotalPrice(fullMenu[i].id));
+			price.push(model.getTotalPrice(fullMenu[i].id));
 			name.push(fullMenu[i].name);
 		}
 		result.push(id);
@@ -36,4 +36,8 @@ var LeftMenuController = function (view, model) {
     		model.setNumberOfGuests(numberOfGuest);
     	}
 	});
+    
+    $("#confirmDinner").click(function () {
+        overallController.nextStep();
+    });
 }
