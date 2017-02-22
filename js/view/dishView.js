@@ -1,5 +1,5 @@
 //ExampleView Object constructor
-var DishView = function (container, model) {
+var DishView = function(container, model) {
     "use strict";
     // Get all the relevant elements of the view (ones that show data
     // and/or ones that responed to interaction)
@@ -13,7 +13,7 @@ var DishView = function (container, model) {
     this.dishView.append('<div id="3" style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text"><img src="images/bakedbrie.jpg" alt="HTML5 Icon" style="width:128px;height:128px;"><b>Baked Brie with Peaches</b></div>');
     this.dishView.append('<div id="100" style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text"><img src="images/meatballs.jpg" alt="HTML5 Icon" style="width:128px;height:128px;"><b>Meat balls</b></div>');
 
-    this.update = function () {
+    this.update = function() {
         // Update the view to show the new number of guests
     };
 
