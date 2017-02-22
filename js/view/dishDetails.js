@@ -16,6 +16,7 @@ var DishDetails = function(container, model) {
         if (id === 0){
             console.log("DishDetails: trying to update information with " +
             "unexistent dish (id = 0)");
+            return;
         }
         var dish = model.getDish(id);
         $("#ingredientTable > tbody").html("");
