@@ -3,10 +3,10 @@ var OverviewController = function (overviewView, model, overallController) {
 
     overviewView.goBackButton.click(function () {
         // Go back to select dish screen
-        overallController.previousStep();
+        overallController.showSelectDish();
     });
 
     overviewView.printFullRecipeButton.click(function () {
-        overallController.nextStep();
+        overallController.showDinnerPreparation();
     });
 };

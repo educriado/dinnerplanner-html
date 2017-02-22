@@ -15,6 +15,8 @@ var OverallController = function () {
     
     this.showSelectDish = function () {
         $("#home-screen").hide();
+        $("#overview-screen").hide();
+        $("#preparation-screen").hide();
         $("#dishView").show();
         $("#leftMenu").show();
     };
@@ -35,7 +37,16 @@ var OverallController = function () {
         $("#listScreen").hide();
         $("#dishView").hide();
         $("#leftMenu").hide();
+        $("#preparation-screen").hide();
         $("#overview-screen").show();
+    };
+
+    this.showDinnerPreparation = function() {
+        $("#listScreen").hide();
+        $("#dishView").hide();
+        $("#leftMenu").hide();
+        $("#overview-screen").hide();
+        $("#preparation-screen").show();
     };
     
     this.nextStep = function () {
