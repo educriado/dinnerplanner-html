@@ -3,6 +3,8 @@ var OverviewView = function (container, model) {
 
     "use strict";
 
+    this.controlInt = 0;
+
     // Get all the relevant elements of the view (ones that show data
     // and/or ones that responed to interaction)
     this.goBackButton = container.find("#go-back-button");
@@ -12,7 +14,9 @@ var OverviewView = function (container, model) {
 
     // Update function called when notified by the model
     this.update = function () {
-        console.log("OverviewView: this.update() function gets executed.");
+        console.log("OverviewView: this.update() function gets executed: " + 
+            this.controlInt);
+        this.controlInt += 1;
 
         // Empty previous content
         container.find("#overview-dynamic-content").empty();
@@ -60,14 +64,14 @@ var OverviewView = function (container, model) {
         menuRow.append(totalPriceColumn);
         
         // Append elements to container (parent)
-        container.find("#overview-dynamic-content").after(menuRow);
+        container.find("#overview-dynamic-content").append(menuRow);
     };
 
     // Add ourselves as observer of the model
     model.addObserver(this);
 
     // Populate the menu overview with the elements from the model
-    this.update();
+    //this.update();
 
 
     /*var menu = model.getFullMenu();
