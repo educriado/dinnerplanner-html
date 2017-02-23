@@ -20,7 +20,7 @@ var DishViewController = function(view, model, overallController) {
     }
 
     view.searchButton.click(function() {
-        var searchResult = model.getAllDishes(view.selectType.val(), 
+        var searchResult = model.getAllDishes(view.selectType.val(),
             view.inputSearch.val());
         view.displayDishes(searchResult);
     });
