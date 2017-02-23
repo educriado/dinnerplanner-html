@@ -4,15 +4,11 @@ var DinnerModel = function () {
 
     "use strict";
     this.numberOfGuests = 4;
-    this.fullMenu = [1, 100];
+    this.fullMenu = [];
     this.observers = [];
+    this.currentSelectedDish = 0;
 
-    //TODO Lab 2 implement the data structure that will hold number of guest
-    // and selected dinner options for dinner menu
-
-    //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
-    //you can use the filter argument to filter out the dish by name or ingredient (use for search)
-    //if you don't pass any filter all the dishes will be returned
+    
 
     this.addObserver = function (observer) {
         this.observers.push(observer);
@@ -25,7 +21,19 @@ var DinnerModel = function () {
             this.observers[key].update();
         }
     };
+    
+    this.setCurrentSelectedDish = function(id) {
+        this.currentSelectedDish = id; 
+        this.notifyObservers();
+    };
+    
+    this.getCurrentSelectedDish = function() {
+        return this.currentSelectedDish;
+    }
 
+    //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
+    //you can use the filter argument to filter out the dish by name or ingredient (use for search)
+    //if you don't pass any filter all the dishes will be returned
     this.getAllDishes = function (type, filter) {
         return dishes.filter(function (dish) {
             var found = true;
@@ -46,6 +54,7 @@ var DinnerModel = function () {
 
     //function that returns a dish of specific ID
     this.getDish = function (id) {
+        var key;
         for (key in dishes) {
             if (parseInt(dishes[key].id) === parseInt(id)) {
                 return dishes[key];

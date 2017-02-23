@@ -1,7 +1,8 @@
-var OverallController = function (document) {
+var OverallController = function () {
     // Identifiers of every screen in correct order
-    // TODO change this to correct screen order when Arhram has his html code
-    var screens = ["home-screen", "overview-screen", "dish-screen", "overview-screen", "preparation-screen"];
+    // TODO add the behaviour to show or hide elements in the select dish view
+    "use strict";
+    var screens = ["home-screen", "select-dish-screen", "overview-screen", "preparation-screen"];
     var currentScreen = 0;
     
     this.init = function () {
@@ -12,6 +13,31 @@ var OverallController = function (document) {
         }
     };
     
+    this.showSelectDish = function () {
+        $("#home-screen").hide();
+        $("#dishView").show();
+        $("#leftMenu").show();
+    };
+    
+    this.showDishDetails = function (id) {
+        
+        $("#listScreen").show();
+        $("#dishView").hide();
+    };
+    
+    this.backButton = function () {
+        
+        $("#listScreen").hide();
+        $("#dishView").show();
+    };
+    
+    this.showDinnerOverview = function() {
+        $("#listScreen").hide();
+        $("#dishView").hide();
+        $("#leftMenu").hide();
+        $("#overview-screen").show();
+    };
+    
     this.nextStep = function () {
         // Hide current screen and show next one
         $("#" + screens[currentScreen]).hide();
@@ -20,10 +46,11 @@ var OverallController = function (document) {
         console.log("OverallController: showing '" + screens[currentScreen] + "' screen.");
     };
     
-    this.previusStep = function () {
+    this.previousStep = function () {
         // Hide current screen and show previous one
         $("#" + screens[currentScreen]).hide();
         $("#" + screens[currentScreen - 1]).show();
         currentScreen--;
+        console.log("OverallController: showing '" + screens[currentScreen] + "' screen.");
     };
 };
