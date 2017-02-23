@@ -6,6 +6,7 @@ var LeftMenu = function (container, model) {
 
     model.addObserver(this);
     this.confirmDinnerButton = container.find("#confirmDinner");
+    this.inputNumberOfPeople = container.find("#inputNumberOfPeople");
     
     this.update = function () {
         //var leftMenuController = new LeftMenuController($("#leftMenu"), model, overallController);
