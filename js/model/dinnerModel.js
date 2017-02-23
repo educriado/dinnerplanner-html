@@ -1,6 +1,6 @@
 //DinnerModel Object constructor
 
-var DinnerModel = function () {
+var DinnerModel = function() {
 
     "use strict";
     this.numberOfGuests = 4;
@@ -8,25 +8,52 @@ var DinnerModel = function () {
     this.observers = [];
     this.currentSelectedDish = 0;
 
-    
+    const apiKey = "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB",
+        apiRecipeSearch =
+        "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search",
+        apiRecipeInformation =
+        "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/{id}/information";
 
-    this.addObserver = function (observer) {
+    function apiRecipeSearchCall() {
+        var result = $.ajax({
+            url: apiRecipeSearch,
+            headers: {
+                'X-Mashape-Key': apiKey
+            },
+            success: function(data) {
+                return data;
+            },
+            error: function(data) {
+                console.log(data)
+            }
+        });
+        if (result !== null) {
+            console.log(result);
+        }
+    }
+
+    function apiRecipeInformationCall(id) {
+
+    }
+
+
+    this.addObserver = function(observer) {
         this.observers.push(observer);
     };
 
-    this.notifyObservers = function () {
+    this.notifyObservers = function() {
         var key;
         for (key in this.observers) {
             //console.log(this.observers[key]);
             this.observers[key].update();
         }
     };
-    
+
     this.setCurrentSelectedDish = function(id) {
-        this.currentSelectedDish = id; 
+        this.currentSelectedDish = id;
         this.notifyObservers();
     };
-    
+
     this.getCurrentSelectedDish = function() {
         return this.currentSelectedDish;
     }
@@ -34,26 +61,26 @@ var DinnerModel = function () {
     //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
     //you can use the filter argument to filter out the dish by name or ingredient (use for search)
     //if you don't pass any filter all the dishes will be returned
-    this.getAllDishes = function (type, filter) {
-        return dishes.filter(function (dish) {
+    this.getAllDishes = function(type, filter) {
+        return dishes.filter(function(dish) {
             var found = true;
             if (filter) {
                 found = false;
-                dish.ingredients.forEach(function (ingredient) {
-                    if (ingredient.name.indexOf(filter) !== -1) {
+                dish.ingredients.forEach(function(ingredient) {
+                    if (ingredient.name.indexOf(filter) != -1) {
                         found = true;
                     }
                 });
-                if (dish.name.indexOf(filter) !== -1) {
+                if (dish.name.indexOf(filter) != -1) {
                     found = true;
                 }
             }
-            return dish.type === type && found;
+            return dish.type == type && found;
         });
     };
 
     //function that returns a dish of specific ID
-    this.getDish = function (id) {
+    this.getDish = function(id) {
         var key;
         for (key in dishes) {
             if (parseInt(dishes[key].id) === parseInt(id)) {
@@ -64,7 +91,7 @@ var DinnerModel = function () {
     };
 
 
-    this.setNumberOfGuests = function (num) {
+    this.setNumberOfGuests = function(num) {
         //TODO Lab 2
         this.numberOfGuests = num;
         this.notifyObservers();
@@ -73,7 +100,7 @@ var DinnerModel = function () {
 
 
     //Returns the dish that is on the menu for selected type 
-    this.getSelectedDish = function (type) {
+    this.getSelectedDish = function(type) {
         //TODO Lab 2
         for (key in this.fullMenu) {
             if (this.getDish(this.fullMenu[key]).type === type) {
@@ -83,7 +110,7 @@ var DinnerModel = function () {
     };
 
     //Returns all the dishes on the menu.
-    this.getFullMenu = function () {
+    this.getFullMenu = function() {
         //TODO Lab 2
         var allDishes = [],
             key;
@@ -94,9 +121,10 @@ var DinnerModel = function () {
     };
 
     //Returns all ingredients for all the dishes on the menu.
-    this.getAllIngredients = function () {
+    this.getAllIngredients = function() {
         //TODO Lab 2
-        var listOfAllIngredients = [], key;
+        var listOfAllIngredients = [],
+            key;
         for (key in this.fullMenu) {
             var ingrdientForDish = [];
             for (key in this.fullMenu[key].ingredients) {
@@ -107,8 +135,10 @@ var DinnerModel = function () {
     };
 
     // Returns price of dish
-    this.getTotalPrice = function (id) {
-        var totalPrice = 0, dish = this.getDish(id), key;
+    this.getTotalPrice = function(id) {
+        var totalPrice = 0,
+            dish = this.getDish(id),
+            key;
         console.log(dish);
         for (key in dish.ingredients) {
             totalPrice = totalPrice + dish.ingredients[key].price;
@@ -119,15 +149,16 @@ var DinnerModel = function () {
     };
 
     // should return 
-    this.getNumberOfGuests = function () {
+    this.getNumberOfGuests = function() {
         //TODO Lab 2
         return this.numberOfGuests;
     };
 
     //Returns the total price of the menu (all the ingredients multiplied by number of guests).
-    this.getTotalMenuPrice = function () {
+    this.getTotalMenuPrice = function() {
         //TODO Lab 2
-        var totalMenuPrice = 0, key, i;
+        var totalMenuPrice = 0,
+            key, i;
         for (key in this.fullMenu) {
             var dish = this.getDish(this.fullMenu[key]),
                 length = dish.ingredients.length;
@@ -139,7 +170,7 @@ var DinnerModel = function () {
         return totalMenuPrice;
     };
 
-    this.getTotalPrice = function (id) {
+    this.getTotalPrice = function(id) {
         var totalPrice = 0,
             dish = this.getDish(id),
             key;
@@ -152,7 +183,7 @@ var DinnerModel = function () {
 
     //Adds the passed dish to the menu. If the dish of that type already exists on the menu
     //it is removed from the menu and the new one added.
-    this.addDishToMenu = function (id) {
+    this.addDishToMenu = function(id) {
         //TODO Lab 2
         console.log("Added dish:" + id);
         var key;
@@ -183,7 +214,7 @@ var DinnerModel = function () {
     };
 
     //Removes dish from menu
-    this.removeDishFromMenu = function (id) {
+    this.removeDishFromMenu = function(id) {
         //TODO Lab 2
         var index = this.fullMenu.indexOf(id);
         this.fullMenu.splice(index, 1);
@@ -209,28 +240,28 @@ var DinnerModel = function () {
             'quantity': 0.5,
             'unit': '',
             'price': 10
-			     }, {
+        }, {
             'name': 'milk',
             'quantity': 30,
             'unit': 'ml',
             'price': 6
-			     }, {
+        }, {
             'name': 'brown sugar',
             'quantity': 7,
             'unit': 'g',
             'price': 1
-			     }, {
+        }, {
             'name': 'ground nutmeg',
             'quantity': 0.5,
             'unit': 'g',
             'price': 12
-			     }, {
+        }, {
             'name': 'white bread',
             'quantity': 2,
             'unit': 'slices',
             'price': 2
-			     }]
-		}, {
+        }]
+    }, {
         'id': 2,
         'name': 'Sourdough Starter',
         'type': 'starter',
@@ -241,18 +272,18 @@ var DinnerModel = function () {
             'quantity': 0.5,
             'unit': 'g',
             'price': 4
-			     }, {
+        }, {
             'name': 'warm water',
             'quantity': 30,
             'unit': 'ml',
             'price': 0
-			     }, {
+        }, {
             'name': 'all-purpose flour',
             'quantity': 15,
             'unit': 'g',
             'price': 2
-			     }]
-		}, {
+        }]
+    }, {
         'id': 3,
         'name': 'Baked Brie with Peaches',
         'type': 'starter',
@@ -263,18 +294,18 @@ var DinnerModel = function () {
             'quantity': 10,
             'unit': 'g',
             'price': 8
-			     }, {
+        }, {
             'name': 'raspberry preserves',
             'quantity': 15,
             'unit': 'g',
             'price': 10
-			     }, {
+        }, {
             'name': 'peaches',
             'quantity': 1,
             'unit': '',
             'price': 4
-			     }]
-		}, {
+        }]
+    }, {
         'id': 100,
         'name': 'Meat balls',
         'type': 'main dish',
@@ -285,58 +316,58 @@ var DinnerModel = function () {
             'quantity': 115,
             'unit': 'g',
             'price': 20
-			     }, {
+        }, {
             'name': 'sea salt',
             'quantity': 0.7,
             'unit': 'g',
             'price': 3
-			     }, {
+        }, {
             'name': 'small onion, diced',
             'quantity': 0.25,
             'unit': '',
             'price': 2
-			     }, {
+        }, {
             'name': 'garlic salt',
             'quantity': 0.7,
             'unit': 'g',
             'price': 2
-			     }, {
+        }, {
             'name': 'Italian seasoning',
             'quantity': 0.6,
             'unit': 'g',
             'price': 3
-			     }, {
+        }, {
             'name': 'dried oregano',
             'quantity': 0.3,
             'unit': 'g',
             'price': 3
-			     }, {
+        }, {
             'name': 'crushed red pepper flakes',
             'quantity': 0.6,
             'unit': 'g',
             'price': 3
-			     }, {
+        }, {
             'name': 'Worcestershire sauce',
             'quantity': 6,
             'unit': 'ml',
             'price': 7
-			     }, {
+        }, {
             'name': 'milk',
             'quantity': 20,
             'unit': 'ml',
             'price': 4
-			     }, {
+        }, {
             'name': 'grated Parmesan cheese',
             'quantity': 5,
             'unit': 'g',
             'price': 8
-			     }, {
+        }, {
             'name': 'seasoned bread crumbs',
             'quantity': 15,
             'unit': 'g',
             'price': 4
-			     }]
-		}, {
+        }]
+    }, {
         'id': 101,
         'name': 'MD 2',
         'type': 'main dish',
@@ -347,18 +378,18 @@ var DinnerModel = function () {
             'quantity': 1,
             'unit': 'pieces',
             'price': 8
-			     }, {
+        }, {
             'name': 'ingredient 2',
             'quantity': 15,
             'unit': 'g',
             'price': 7
-			     }, {
+        }, {
             'name': 'ingredient 3',
             'quantity': 10,
             'unit': 'ml',
             'price': 4
-			     }]
-		}, {
+        }]
+    }, {
         'id': 102,
         'name': 'MD 3',
         'type': 'main dish',
@@ -369,18 +400,18 @@ var DinnerModel = function () {
             'quantity': 2,
             'unit': 'pieces',
             'price': 8
-			     }, {
+        }, {
             'name': 'ingredient 2',
             'quantity': 10,
             'unit': 'g',
             'price': 7
-			     }, {
+        }, {
             'name': 'ingredient 3',
             'quantity': 5,
             'unit': 'ml',
             'price': 4
-			     }]
-		}, {
+        }]
+    }, {
         'id': 103,
         'name': 'MD 4',
         'type': 'main dish',
@@ -391,18 +422,18 @@ var DinnerModel = function () {
             'quantity': 1,
             'unit': 'pieces',
             'price': 4
-			     }, {
+        }, {
             'name': 'ingredient 2',
             'quantity': 12,
             'unit': 'g',
             'price': 7
-			     }, {
+        }, {
             'name': 'ingredient 3',
             'quantity': 6,
             'unit': 'ml',
             'price': 4
-			     }]
-		}, {
+        }]
+    }, {
         'id': 200,
         'name': 'Chocolat Ice cream',
         'type': 'dessert',
@@ -413,8 +444,8 @@ var DinnerModel = function () {
             'quantity': 100,
             'unit': 'ml',
             'price': 6
-			     }]
-		}, {
+        }]
+    }, {
         'id': 201,
         'name': 'Vanilla Ice cream',
         'type': 'dessert',
@@ -425,8 +456,8 @@ var DinnerModel = function () {
             'quantity': 100,
             'unit': 'ml',
             'price': 6
-			}]
-		}, {
+        }]
+    }, {
         'id': 202,
         'name': 'Strawberry',
         'type': 'dessert',
@@ -437,6 +468,6 @@ var DinnerModel = function () {
             'quantity': 100,
             'unit': 'ml',
             'price': 6
-			     }]
-		}];
+        }]
+    }];
 };
