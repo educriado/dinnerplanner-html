@@ -16,9 +16,11 @@ var DishView = function(container, model) {
     this.dishView.append('<div id="3" style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text"><img src="images/bakedbrie.jpg" alt="HTML5 Icon" style="width:128px;height:128px;"><b>Baked Brie with Peaches</b></div>');
     this.dishView.append('<div id="100" style="margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text"><img src="images/meatballs.jpg" alt="HTML5 Icon" style="width:128px;height:128px;"><b>Meat balls</b></div>');
 
+
     this.update = function() {
-        // Update the view to show the new number of guests
-    };
+      // Update the view to show the new number of guests
+    }
+
 
     this.displayDishes = function(dishes) {
         // Empty the div containing the dishes
