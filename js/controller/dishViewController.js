@@ -5,8 +5,8 @@ var DishViewController = function(view, model, overallController) {
     this.dishViewDetail = view.dishViewDetail;
     this.ingredientDiv = this.dishViewDetail.find("#ingredientDiv");
     this.ingredientTableDiv = this.dishViewDetail.find("#ingredientTableDiv");
-    this.ingredientTable = this.ingredientTableDiv.find("#ingredientTable")
-    this.tbody = this.ingredientTable.find("tbody")
+    this.ingredientTable = this.ingredientTableDiv.find("#ingredientTable");
+    this.tbody = this.ingredientTable.find("tbody");
     var array = [];
     $('div', this.dishViewImage).each(function() {
         array.push($(this).attr('id'));
