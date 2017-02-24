@@ -4,7 +4,7 @@ $(function () {
     var model = new DinnerModel();
 
     // Create the needed views
-    var homeView = new HomeView($("#home-screen"));
+    var homeView = new HomeView($("#home-screen"), model);
     var overviewView = new OverviewView($("#overview-screen"), model);
     // TODO Change preparationView to JQuery
     var dishView = new DishView($("#dishView"),model);
