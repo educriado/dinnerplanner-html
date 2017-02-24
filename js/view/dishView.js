@@ -5,6 +5,7 @@ var DishView = function(container, model) {
     // and/or ones that responed to interaction)
     model.addObserver(this);
     this.dishView = container.find("#dishViewImage");
+    console.log("DishView: found container:");
     this.searchButton = container.find("#selectDishButton");
     this.inputSearch = container.find("#inputSearch");
     this.selectType = container.find("#typeSelect");
@@ -28,7 +29,7 @@ var DishView = function(container, model) {
         this.dishView.empty();
         var key;
         for(key in dishes) {
-            this.dishView.append('<div id="' + dishes[key].id + 
+            this.dishView.append('<div class="dishClass" id="' + dishes[key].id + 
                 '" style="margin-left: 128px; margin-top: 125px; margin-right: 50px; float: left;" class="img-with-text"><img src="images/'+dishes[key].image +'" alt="HTML5 Icon" style="width:128px;height:128px;"><b>'+dishes[key].name+'</b></div>');
         }
 

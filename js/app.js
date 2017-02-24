@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
 
     // We instantiate our model
     var model = new DinnerModel();
@@ -7,13 +7,13 @@ $(function () {
     var homeView = new HomeView($("#home-screen"), model);
     var overviewView = new OverviewView($("#overview-screen"), model);
     // TODO Change preparationView to JQuery
-    var dishView = new DishView($("#dishView"),model);
-    var leftMenu = new LeftMenu($("#leftMenu"),model);
+    var dishView = new DishView($("#dishView"), model);
+    var leftMenu = new LeftMenu($("#leftMenu"), model);
     var preparationView = new PreparationView($("#preparation-screen"), model);
     var dishDetails = new DishDetails($("#listScreen"), model);
 
     // Create the needed controllers
-    
+
     var overallController = new OverallController();
     var homeController = new HomeController(homeView, overallController);
     var overviewController = new OverviewController(overviewView, model, overallController);
@@ -22,5 +22,5 @@ $(function () {
     var leftMenuController = new LeftMenuController(leftMenu, model, overallController);
     var dishDetailsController = new DishDetailsController(dishDetails, model, overallController);
     overallController.init();
-    
+
 });
