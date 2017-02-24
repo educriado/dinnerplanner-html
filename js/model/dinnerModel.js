@@ -8,7 +8,21 @@ var DinnerModel = function () {
     this.observers = [];
     this.currentSelectedDish = 0;
 
-    
+
+    this.ajaxMethod = function () {
+        $.ajax( {
+           url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search',
+           headers: {
+             'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
+           },
+           success: function(data) {
+             console.log(data)
+           },
+           error: function(data) {
+             console.log(data)
+           }
+         }) 
+    }
 
     this.addObserver = function (observer) {
         this.observers.push(observer);
