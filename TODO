@@ -6,9 +6,9 @@
 Home page:
 
 Select dish:
+    - Use this.update() function to display the elements.
     - Use bootstrap to display the dishes instead of manual aligning.
-    - When we change the displayed dishes depending on the search/select input
-    the click event from the controller is gone.
+    - 
 
 Dish details:
 

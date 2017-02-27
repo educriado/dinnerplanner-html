@@ -1,18 +1,12 @@
 var DishViewController = function(view, model, overallController) {
 
-    this.dishViewImage = view.dishView;
-    this.dishViewSelect = view.dishViewSelect;
-    this.dishViewDetail = view.dishViewDetail;
-    this.ingredientDiv = this.dishViewDetail.find("#ingredientDiv");
-    this.ingredientTableDiv = this.dishViewDetail.find("#ingredientTableDiv");
-    this.ingredientTable = this.ingredientTableDiv.find("#ingredientTable");
-    this.tbody = this.ingredientTable.find("tbody");
+    // Add click event to initially shown dishes
     var array = [];
-    $('div', this.dishViewImage).each(function() {
+    $('div', view.dishView).each(function() {
         array.push($(this).attr('id'));
     });
     for (key in array) {
-        this.dish = this.dishViewImage.find("#" + array[key]);
+        this.dish = view.dishView.find("#" + array[key]);
         this.dish.click(function() {
             model.setCurrentSelectedDish(this.id);
             overallController.showDishDetails(this.id);
@@ -20,14 +14,28 @@ var DishViewController = function(view, model, overallController) {
     }
 
     view.searchButton.click(function() {
-        var searchResult = model.getAllDishes(view.selectType.val(),
-            view.inputSearch.val());
-        view.displayDishes(searchResult);
+        view.update();
+        // var searchResult = model.getAllDishes(view.selectType.val(),
+        //     view.inputSearch.val());
+        // view.displayDishes(searchResult);
     });
 
     view.selectType.change(function() {
-        var searchResult = model.getAllDishes(view.selectType.val());
-        view.displayDishes(searchResult);
+        // var searchResult = model.getAllDishes(view.selectType.val()),
+        //     key;
+        // view.displayDishes(searchResult);
+        view.update();
+        // Click event for the new displayed elements
+        // for (key in searchResult) {
+        //     var dishId = searchResult[key].id;
+        //     console.log("DishViewController: " + searchResult[key].id);
+        //     var dishElement = view.dishView.find("#" + dishId);
+        //     console.log(dishElement);
+        //     dishElement.click(function() {
+        //         model.setCurrentSelectedDish(this.id);
+        //         overallController.showDishDetails(this.id);
+        //     });
+        // }
     });
 
     /*function getDishDetail(id) {
