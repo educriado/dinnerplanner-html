@@ -1,0 +1,359 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"a",
+				"analyzedInstructions"
+			],
+			[
+				"o",
+				"overflow"
+			],
+			[
+				"v",
+				"var"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"di",
+				"div\tTag"
+			],
+			[
+				"h",
+				"h3\tTag"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"numb",
+				"numberOfGuest"
+			],
+			[
+				"number",
+				"numberOfGuests"
+			],
+			[
+				"dinn",
+				"dinnerModel1"
+			],
+			[
+				"get",
+				"getTotalPrice"
+			],
+			[
+				"total",
+				"totalPrice"
+			],
+			[
+				"pr",
+				"price"
+			],
+			[
+				"ing",
+				"ingredients"
+			],
+			[
+				"dis",
+				"dish"
+			],
+			[
+				"to",
+				"totalPrice"
+			],
+			[
+				"in",
+				"ingredients"
+			],
+			[
+				"ba",
+				"black"
+			],
+			[
+				"MA",
+				"margin-left"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"paddi",
+				"padding-top"
+			],
+			[
+				"col",
+				"color"
+			],
+			[
+				"bl",
+				"black"
+			],
+			[
+				"op",
+				"option\tTag"
+			],
+			[
+				"margi",
+				"margin-left"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"border",
+				"border-left"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"f",
+				"float"
+			],
+			[
+				"bor",
+				"border-top"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"the",
+				"thead"
+			],
+			[
+				"all",
+				"allDishes"
+			],
+			[
+				"li",
+				"listOfAllIngredients"
+			],
+			[
+				"n",
+				"name"
+			],
+			[
+				"fu",
+				"fullMenu"
+			],
+			[
+				"ingred",
+				"ingrdientForDish"
+			],
+			[
+				"i",
+				"ingredients"
+			],
+			[
+				"p",
+				"price"
+			],
+			[
+				"dish",
+				"dishType"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/css",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/images",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js/controller",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js/model",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js/view"
+	],
+	"file_history":
+	[
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/css/custom.css",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/index.html",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js/controller/dishDetailsController.js",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js/view/dishDetails.js",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js/model/dinnerModel.js",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js/controller/dishViewController.js",
+		"/Users/arhambengani/Documents/Graphics/Assignment05/code/exercises/task/foundation.cpp",
+		"/Users/arhambengani/Desktop/LAB2_copy/dinnerplanner-html/index.html",
+		"/Users/arhambengani/Downloads/dinnerplanner-html-master/js/app.js",
+		"/Users/arhambengani/Downloads/dinnerplanner-html-master/js/view/exampleView.js",
+		"/Users/arhambengani/Desktop/Arham Bengani_files/y15nEAGTeGW.js",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/styles.css",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/js/view/Screen2.js",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/Screen1.html",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/Screen2.html",
+		"/Users/arhambengani/Desktop/LAB2/dinnerplanner-html/Screen2.js",
+		"/Users/arhambengani/Desktop/Screen1_Copy1.html"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"push_back",
+			"gTankPathsControlPolygon",
+			"4",
+			"guests"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "int-prog.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 211.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
