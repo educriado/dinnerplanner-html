@@ -8,6 +8,7 @@ var DishViewController = function(view, model, overallController) {
         });
         for (key in array) {
             var dish = view.dishView.find("#" + array[key]);
+            console.log("DishViewController " + dish);
             dish.click(function() {
                 model.setCurrentSelectedDish(this.id);
                 overallController.showDishDetails(this.id);
