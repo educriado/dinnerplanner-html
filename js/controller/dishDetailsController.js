@@ -3,7 +3,7 @@ var DishDetailsController = function (view, model, overallController) {
 
     view.backButton.click(function () {
         overallController.backButton();
-        model.setCurrentSelectedDish(0);
+        model.setCurrentSelectedDish("0");
     });
 
     view.confirmButton.click(function () {

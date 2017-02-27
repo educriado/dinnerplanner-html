@@ -8,16 +8,15 @@ var DinnerModel = function() {
     this.observers = [];
     this.currentSelectedDish = 0;
 
-
-
-    this.ajaxMethod = function () {
+    this.getDishByID = function (id, cb) {
         $.ajax( {
-           url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search',
+           url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information?id='+id+'',
            headers: {
              'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
            },
            success: function(data) {
              console.log(data)
+             cb(data);
            },
            error: function(data) {
              console.log(data)
@@ -49,11 +48,6 @@ var DinnerModel = function() {
             console.log(result);
         }
     }
-
-    function apiRecipeInformationCall(id) {
-
-    }
-
 
     this.addObserver = function(observer) {
         this.observers.push(observer);
