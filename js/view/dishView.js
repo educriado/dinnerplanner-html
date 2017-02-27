@@ -32,8 +32,10 @@ var DishView = function(container, model) {
             var titleO = $("<h5>" + title + "</h5>"),
                 dishColumn = $("<div id=" + dishId + "/>", {
                     "class": "col-md-3"
-                });
-            dishColumn.append(titleO);
+                }),
+                imageO = $("<img />");
+            imageO.attr("src", baseUri + image);
+            dishColumn.append(titleO, imageO);
             rowO.append(dishColumn);
         }
         console.log(this);
@@ -44,7 +46,7 @@ var DishView = function(container, model) {
 
     function errorCallback(results) {
         var errorMsg = $("<h2>There was an error calling the API.</h2>");
-        errorMsg.css("color": "red");
+        errorMsg.css("color", "red");
         var dishViewVar = container.find("#dishViewImage");
         dishViewVar.append(errorMsg);
     }
@@ -67,4 +69,6 @@ var DishView = function(container, model) {
         }
 
     };
+
+    this.update();
 };
