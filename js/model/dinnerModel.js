@@ -79,22 +79,40 @@ var DinnerModel = function() {
     //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
     //you can use the filter argument to filter out the dish by name or ingredient (use for search)
     //if you don't pass any filter all the dishes will be returned
-    this.getAllDishes = function(type, filter) {
-        return dishes.filter(function(dish) {
-            var found = true;
-            if (filter) {
-                found = false;
-                dish.ingredients.forEach(function(ingredient) {
-                    if (ingredient.name.indexOf(filter) != -1) {
-                        found = true;
-                    }
-                });
-                if (dish.name.indexOf(filter) != -1) {
-                    found = true;
-                }
+    this.getAllDishes = function(type, filter, callback, errorCallback) {
+
+        // Do the API call
+        var result = $.ajax({
+            url: apiRecipeSearch,
+            headers: {
+                'X-Mashape-Key': apiKey
+            },
+            data: {
+                query: filter,
+                type: type
+            },
+            success: function(results) {
+                callback(results);
+            },
+            error: function(results) {
+                callback(results);
             }
-            return dish.type == type && found;
         });
+        // return dishes.filter(function(dish) {
+        //     var found = true;
+        //     if (filter) {
+        //         found = false;
+        //         dish.ingredients.forEach(function(ingredient) {
+        //             if (ingredient.name.indexOf(filter) != -1) {
+        //                 found = true;
+        //             }
+        //         });
+        //         if (dish.name.indexOf(filter) != -1) {
+        //             found = true;
+        //         }
+        //     }
+        //     return dish.type == type && found;
+        // });
     };
 
     //function that returns a dish of specific ID
