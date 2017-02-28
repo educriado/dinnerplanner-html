@@ -5,6 +5,7 @@ var DinnerModel = function() {
     "use strict";
     this.numberOfGuests = 4;
     this.fullMenu = [];
+    this.fullMenuDetail = [];
     this.observers = [];
     this.currentSelectedDish = 262682;
     this.currentType = "main course";
@@ -62,11 +63,11 @@ var DinnerModel = function() {
         }
     };
 
-    this.setCurrentType(type) {
+    this.setCurrentType = function(type) {
         this.currentType = type;
     };
 
-    this.getCurrentType() {
+    this.getCurrentType = function() {
         return this.currentType;
     };
 
@@ -253,31 +254,38 @@ var DinnerModel = function() {
     };*/
 
     this.addDishToMenu = function(id) {
-        //TODO Lab 2
+        //TODO Lab 2 id name type price 
         console.log("Added dish:" + id);
         var key;
-        if (this.fullMenu.indexOf(id) === -1) {
-            /*var dishType = this.getDish(id).type;
-            if (this.fullMenu.length > 0) {
-                for (key in this.fullMenu) {
-                    if (this.getDish(this.fullMenu[key]).type === dishType) {
+        var dishInfo = [];
+        if(this.fullMenu.indexOf(id) === -1) {
+            var dishType = this.getCurrentType();
+            if(this.fullMenu.length > 0){
+                for(key in this.fullMenu){
+                    if(this.fullMenuDetail[key][1] === dishType){
                         this.removeDishFromMenu(this.fullMenu[key]);
+                        dishInfo.push(id);
+                        dishInfo.push(this.getCurrentType);
                         this.fullMenu.push(id);
+                        this.fullMenuDetail.push(dishInfo);
                         this.notifyObservers();
                         return 1;
-                    }
+                    } 
                 }
+                dishInfo.push(id);
+                dishInfo.push(this.getCurrentType);
                 this.fullMenu.push(id);
+                this.fullMenuDetail.push(dishInfo);
                 this.notifyObservers();
                 return 1;
             } else {
+                dishInfo.push(id);
+                dishInfo.push(this.getCurrentType);
                 this.fullMenu.push(id);
+                this.fullMenuDetail.push(dishInfo);
                 this.notifyObservers();
                 return 1;
-            }*/
-            this.fullMenu.push(id);
-            this.notifyObservers();
-            return 1;
+            }
         } else {
             this.notifyObservers();
             return 0;
@@ -289,6 +297,7 @@ var DinnerModel = function() {
         //TODO Lab 2
         var index = this.fullMenu.indexOf(id);
         this.fullMenu.splice(index, 1);
+        this.fullMenuDetail.splice(index, 1);
         this.notifyObservers();
     };
 
