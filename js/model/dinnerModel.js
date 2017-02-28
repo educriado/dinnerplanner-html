@@ -7,6 +7,7 @@ var DinnerModel = function() {
     this.fullMenu = [];
     this.observers = [];
     this.currentSelectedDish = 262682;
+    this.currentType = "main course";
 
     this.getDishByID = function (id, cb) {
         $.ajax( {
@@ -59,6 +60,14 @@ var DinnerModel = function() {
             //console.log(this.observers[key]);
             this.observers[key].update();
         }
+    };
+
+    this.setCurrentType(type) {
+        this.currentType = type;
+    };
+
+    this.getCurrentType() {
+        return this.currentType;
     };
 
     this.setCurrentSelectedDish = function(id) {

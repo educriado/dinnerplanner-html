@@ -8,7 +8,7 @@ Home page:
 Select dish:
     - Use this.update() function to display the elements.
     - Use bootstrap to display the dishes instead of manual aligning.
-    - 
+    - Write url of image.
 
 Dish details:
 
