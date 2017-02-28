@@ -13,6 +13,7 @@ var DishDetails = function(container, model) {
     this.update = function() {
         // this.dishViewDetail = view.find("#listScreen");
         var id = model.getCurrentSelectedDish();
+        var type = model.getCurrentType();
         if (id === 0){
             console.log("DishDetails: trying to update information with " +
             "unexistent dish (id = 0)");
