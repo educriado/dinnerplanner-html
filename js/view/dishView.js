@@ -44,7 +44,7 @@ var DishView = function(container, model) {
 
     function errorCallback(results) {
         var errorMsg = $("<h2>There was an error calling the API.</h2>");
-        errorMsg.css("color": "red");
+        errorMsg.css("color", "red");
         var dishViewVar = container.find("#dishViewImage");
         dishViewVar.append(errorMsg);
     }
