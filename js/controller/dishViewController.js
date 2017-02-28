@@ -1,19 +1,10 @@
 var DishViewController = function(view, model, overallController) {
     // Add click event to initially shown dishes
     function addClickEventToElems() {
-        var array = [],
-            key;
-        $('div', view.dishView).each(function() {
-            array.push($(this).attr('id'));
+        view.dishView.on("click", ".dishPic", function() {
+            model.setCurrentSelectedDish(this.id);
+            overallController.showDishDetails(this.id);
         });
-        for (key in array) {
-            var dish = view.dishView.find("#" + array[key]);
-            console.log("DishViewController " + dish);
-            dish.click(function() {
-                model.setCurrentSelectedDish(this.id);
-                overallController.showDishDetails(this.id);
-            });
-        }
     }
 
     view.searchButton.click(function() {
