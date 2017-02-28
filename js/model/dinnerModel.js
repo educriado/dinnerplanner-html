@@ -6,7 +6,7 @@ var DinnerModel = function() {
     this.numberOfGuests = 4;
     this.fullMenu = [];
     this.observers = [];
-    this.currentSelectedDish = 0;
+    this.currentSelectedDish = 262682;
     this.currentType = "main course";
 
     this.getDishByID = function (id, cb) {
@@ -222,7 +222,7 @@ var DinnerModel = function() {
 
     //Adds the passed dish to the menu. If the dish of that type already exists on the menu
     //it is removed from the menu and the new one added.
-    this.addDishToMenu = function(id) {
+    /*this.addDishToMenu = function(id) {
         //TODO Lab 2
         console.log("Added dish:" + id);
         var key;
@@ -246,6 +246,38 @@ var DinnerModel = function() {
                 return 1;
             }
 
+        } else {
+            this.notifyObservers();
+            return 0;
+        }
+    };*/
+
+    this.addDishToMenu = function(id) {
+        //TODO Lab 2
+        console.log("Added dish:" + id);
+        var key;
+        if (this.fullMenu.indexOf(id) === -1) {
+            /*var dishType = this.getDish(id).type;
+            if (this.fullMenu.length > 0) {
+                for (key in this.fullMenu) {
+                    if (this.getDish(this.fullMenu[key]).type === dishType) {
+                        this.removeDishFromMenu(this.fullMenu[key]);
+                        this.fullMenu.push(id);
+                        this.notifyObservers();
+                        return 1;
+                    }
+                }
+                this.fullMenu.push(id);
+                this.notifyObservers();
+                return 1;
+            } else {
+                this.fullMenu.push(id);
+                this.notifyObservers();
+                return 1;
+            }*/
+            this.fullMenu.push(id);
+            this.notifyObservers();
+            return 1;
         } else {
             this.notifyObservers();
             return 0;
