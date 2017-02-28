@@ -62,11 +62,11 @@ var DinnerModel = function() {
         }
     };
 
-    this.setCurrentType(type) {
-        this.currentType = type;
+    this.setCurrentType = function(dishType) {
+        this.currentType = dishType;
     };
 
-    this.getCurrentType() {
+    this.getCurrentType = function() {
         return this.currentType;
     };
 
