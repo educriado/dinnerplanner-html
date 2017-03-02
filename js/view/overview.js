@@ -14,7 +14,7 @@ var OverviewView = function (container, model) {
 
     // Update function called when notified by the model
     this.update = function () {
-        console.log("OverviewView: this.update() function gets executed: " + 
+        /*console.log("OverviewView: this.update() function gets executed: " + 
             this.controlInt);
         this.controlInt += 1;
 
@@ -64,7 +64,7 @@ var OverviewView = function (container, model) {
         menuRow.append(totalPriceColumn);
         
         // Append elements to container (parent)
-        container.find("#overview-dynamic-content").append(menuRow);
+        container.find("#overview-dynamic-content").append(menuRow);*/
     };
 
     // Add ourselves as observer of the model

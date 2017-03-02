@@ -16,12 +16,13 @@ var LeftMenu = function(container, model) {
         var price = [];
         var name = [];
         var id = [];
-        var fullMenu = model.getFullMenu();
+        var fullMenu = model.getFullMenuDetail();
+        var totalNumberOfGuests = model.getNumberOfGuests();
 
         for (i = 0; i < fullMenu.length; i++) {
-            id.push(fullMenu[i].id);
-            price.push(model.getTotalPrice(fullMenu[i].id));
-            name.push(fullMenu[i].name);
+            id.push(fullMenu[i][0]);
+            price.push(fullMenu[i][4]);
+            name.push(fullMenu[i][1]);
         }
         $('#pendingCost').text("");
         $("#costTable > tbody").html("");
@@ -31,10 +32,11 @@ var LeftMenu = function(container, model) {
          var id = dish[0];
          var name = dish[1];
          var price = dish[2];*/
+
         for (var i = 0; i < id.length; i++) {
             $('#costTable > tbody > tr:first').before(
                 '<tr class="costTable" id="' + id[i] + '" ><td>' + name[i] +
-                '</td><td>' + price[i] + '</td></tr>');
+                '</td><td>' + (price[i] * totalNumberOfGuests) + '</td></tr>');
         }
         $('#costTablePrice').text('SEK ' + model.getTotalMenuPrice());
         this.dishList = container.find(".costTable");

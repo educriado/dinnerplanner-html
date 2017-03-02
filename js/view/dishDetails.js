@@ -11,7 +11,6 @@ var DishDetails = function(container, model) {
 
 
     this.update = function() {
-        // this.dishViewDetail = view.find("#listScreen");
         var id = model.getCurrentSelectedDish();
         var type = model.getCurrentType();
         if (id === 0){
@@ -33,38 +32,18 @@ var DishDetails = function(container, model) {
                     price + '</td></tr>');
                 totalPrice += 1 * dish.extendedIngredients[key].amount;
             }
-            //var totalPrice = model.getTotalPrice(id);
             var numberOfGuests = model.getNumberOfGuests();
             totalPrice = totalPrice * numberOfGuests;
             container.find('#totalPrice').text(totalPrice / numberOfGuests);
             $('#pendingCost').text(totalPrice);
-            /*var src = dish.image;
-            container.find('#imgLocation').attr("src", 'images/' + src);
-            container.find('#preparation').html("");*/
+            var src = dish.image;
+            container.find('#imgLocation').attr("src", src);
             container.find('#preparation').html("");
             for(var key in dish.analyzedInstructions){
                 for(var key1 in dish.analyzedInstructions[key].steps){
                     container.find('#preparation').append('<li>'+dish.analyzedInstructions[key].steps[key1].step+'</li>');
                 }
             }
-
         });
-        /*var dish = model.getDish(id);
-        $("#ingredientTable > tbody").html("");
-        for (var key in dish.ingredients) {
-            $("#ingredientTable > tbody").append('<tr><td>' +
-                dish.ingredients[key].quantity + ' ' +
-                dish.ingredients[key].unit + '</td><td>' +
-                dish.ingredients[key].name + '</td><td>SEK</td><td>' +
-                dish.ingredients[key].price + '</td></tr>');
-        }
-        var totalPrice = model.getTotalPrice(id);
-        var numberOfGuests = model.getNumberOfGuests();
-        container.find('#totalPrice').text(totalPrice / numberOfGuests);
-        $('#pendingCost').text(totalPrice);
-        var src = dish.image;
-        container.find('#imgLocation').attr("src", 'images/' + src);
-        container.find('#preparation').html("");
-        container.find('#preparation').append(dish.description);*/
     };
 }

@@ -8,7 +8,7 @@ var PreparationView = function (container, model) {
     this.numberOfGuests = container.find("#people-attending-dinner");
     
     this.update = function () {
-        console.log("PreparationView: this.update() function gets executed");
+       /* console.log("PreparationView: this.update() function gets executed");
         
         // Empty previous content
         container.find("#preparation-dynamic-content").empty();
@@ -58,7 +58,7 @@ var PreparationView = function (container, model) {
             
             dishRow.append(imgColumn, nameColumn, preparationColumn);
             container.find("#preparation-dynamic-content").append(dishRow);
-        }
+        }*/
         
     };
     

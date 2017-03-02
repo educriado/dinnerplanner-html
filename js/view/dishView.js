@@ -33,9 +33,10 @@ var DishView = function(container, model) {
                 title = results[key].title,
                 image = results[key].image;
             var titleO = $("<h5>" + title + "</h5>"),
-                dishColumn = $("<div id=" + dishId + "/>"),
+                dishColumn = $("<div id=" + dishId + " />"),
                 imageO = $("<img />");
             dishColumn.attr("class", "col-md-2 dishPic");
+            dishColumn.attr("value", title);
             imageO.attr("src", baseUri + image);
             imageO.attr("width", imageWidth);
             imageO.attr("height", imageWidth);
@@ -46,7 +47,7 @@ var DishView = function(container, model) {
                 var dishViewVar = container.find("#dishViewImage");
                 dishViewVar.append(rowO);
             }
-            dishColumn.append(titleO, imageO);
+            dishColumn.append(imageO, titleO);
             rowO.append(dishColumn);
             dishNum += 1;
         }
@@ -68,6 +69,7 @@ var DishView = function(container, model) {
         this.dishView.empty();
         model.getAllDishes(this.selectType.val(), this.inputSearch.val(), callback,
             errorCallback);
+        model.setCurrentType(this.selectType.val());
     };
 
 

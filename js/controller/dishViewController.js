@@ -3,6 +3,7 @@ var DishViewController = function(view, model, overallController) {
     function addClickEventToElems() {
         view.dishView.on("click", ".dishPic", function() {
             model.setCurrentSelectedDish(this.id);
+            model.setCurrentName(this.innerText);
             overallController.showDishDetails(this.id);
         });
     }

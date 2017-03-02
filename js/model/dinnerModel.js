@@ -7,24 +7,12 @@ var DinnerModel = function() {
     this.fullMenu = [];
     this.fullMenuDetail = [];
     this.observers = [];
-    this.currentSelectedDish = 262682;
+    this.currentSelectedDish = 0;
     this.currentType = "main course";
-
-    this.getDishByID = function (id, cb) {
-        $.ajax( {
-           url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information?id='+id+'',
-           headers: {
-             'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
-           },
-           success: function(data) {
-             console.log(data)
-             cb(data);
-           },
-           error: function(data) {
-             console.log(data)
-           }
-         }) 
-    }
+    this.currentDishImage = "";
+    this.currentDishName = "";
+    this.currentPrice = 0;
+    this.currentInstruction = "";
 
     const apiKey = "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB",
         apiRecipeSearch =
@@ -32,23 +20,69 @@ var DinnerModel = function() {
         apiRecipeInformation =
         "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/{id}/information";
 
+    this.setCurrentType = function(dishType) {
+        this.currentType = dishType;
+    };
 
-    function apiRecipeSearchCall() {
-        var result = $.ajax({
-            url: apiRecipeSearch,
-            headers: {
-                'X-Mashape-Key': apiKey
-            },
-            success: function(data) {
-                return data;
-            },
-            error: function(data) {
-                console.log(data)
-            }
-        });
-        if (result !== null) {
-            console.log(result);
-        }
+    this.getCurrentType = function() {
+        return this.currentType;
+    };
+
+    this.setCurrentImage = function(image) {
+        this.currentDishImage = image;
+    };
+
+    this.getCurrentImage = function() {
+        return this.currentDishImage;
+    };
+
+    this.setCurrentName = function(name) {
+        this.currentDishName = name;
+    };
+
+    this.getCurrentName = function() {
+        return this.currentDishName;
+    };   
+
+    this.setPrice = function(price) {
+        this.currentPrice = price;
+    };
+
+    this.getPrice = function() {
+        return this.currentPrice;
+    };
+    
+    this.setInstructions = function(instruction) {
+        this.currentInstruction = instruction;
+    };
+
+    this.getInstructions = function() {
+        return this.currentInstruction;
+    };
+
+    this.getDishByID = function (id, cb) {
+        var model = this;
+        $.ajax( {
+           url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information?id='+id+'',
+           headers: {
+             'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
+           },
+           success: function(data) {
+             console.log(data)
+             model.setCurrentImage(data.image);
+             //model.setCurrentName(data.name);
+             var totalPrice = 0;
+             for (var key in data.extendedIngredients) {
+                totalPrice += 1 * data.extendedIngredients[key].amount;
+             }
+             model.setPrice(totalPrice);
+             model.setInstructions(data.instructions);
+             cb(data);
+           },
+           error: function(data) {
+             console.log(data)
+           }
+         }) 
     }
 
     this.addObserver = function(observer) {
@@ -58,17 +92,8 @@ var DinnerModel = function() {
     this.notifyObservers = function() {
         var key;
         for (key in this.observers) {
-            //console.log(this.observers[key]);
             this.observers[key].update();
         }
-    };
-
-    this.setCurrentType = function(dishType) {
-        this.currentType = dishType;
-    };
-
-    this.getCurrentType = function() {
-        return this.currentType;
     };
 
     this.setCurrentSelectedDish = function(id) {
@@ -137,7 +162,11 @@ var DinnerModel = function() {
         this.notifyObservers();
     };
 
-
+    // should return 
+    this.getNumberOfGuests = function() {
+        //TODO Lab 2
+        return this.numberOfGuests;
+    };
 
     //Returns the dish that is on the menu for selected type 
     this.getSelectedDish = function(type) {
@@ -159,6 +188,10 @@ var DinnerModel = function() {
         }
         return allDishes;
     };
+
+    this.getFullMenuDetail = function() {
+        return this.fullMenuDetail;
+    }
 
     //Returns all ingredients for all the dishes on the menu.
     this.getAllIngredients = function() {
@@ -188,23 +221,13 @@ var DinnerModel = function() {
         return totalPrice;
     };
 
-    // should return 
-    this.getNumberOfGuests = function() {
-        //TODO Lab 2
-        return this.numberOfGuests;
-    };
-
     //Returns the total price of the menu (all the ingredients multiplied by number of guests).
     this.getTotalMenuPrice = function() {
         //TODO Lab 2
         var totalMenuPrice = 0,
-            key, i;
-        for (key in this.fullMenu) {
-            var dish = this.getDish(this.fullMenu[key]),
-                length = dish.ingredients.length;
-            for (i = 0; i < length; i++) {
-                totalMenuPrice = parseInt(totalMenuPrice + parseInt(dish.ingredients[i].price, 10), 10);
-            }
+            key;
+        for (key in this.fullMenuDetail) {
+            totalMenuPrice = totalMenuPrice + this.fullMenuDetail[key][4];
         }
         totalMenuPrice = totalMenuPrice * this.getNumberOfGuests();
         return totalMenuPrice;
@@ -262,10 +285,14 @@ var DinnerModel = function() {
             var dishType = this.getCurrentType();
             if(this.fullMenu.length > 0){
                 for(key in this.fullMenu){
-                    if(this.fullMenuDetail[key][1] === dishType){
+                    if(this.fullMenuDetail[key][2] === dishType){
                         this.removeDishFromMenu(this.fullMenu[key]);
                         dishInfo.push(id);
-                        dishInfo.push(this.getCurrentType);
+                        dishInfo.push(this.getCurrentName());
+                        dishInfo.push(this.getCurrentType());
+                        dishInfo.push(this.getCurrentImage());
+                        dishInfo.push(this.getPrice());
+                        dishInfo.push(this.getInstructions());
                         this.fullMenu.push(id);
                         this.fullMenuDetail.push(dishInfo);
                         this.notifyObservers();
@@ -273,14 +300,22 @@ var DinnerModel = function() {
                     } 
                 }
                 dishInfo.push(id);
-                dishInfo.push(this.getCurrentType);
+                dishInfo.push(this.getCurrentName());
+                dishInfo.push(this.getCurrentType());
+                dishInfo.push(this.getCurrentImage());
+                dishInfo.push(this.getPrice());
+                dishInfo.push(this.getInstructions());
                 this.fullMenu.push(id);
                 this.fullMenuDetail.push(dishInfo);
                 this.notifyObservers();
                 return 1;
             } else {
                 dishInfo.push(id);
-                dishInfo.push(this.getCurrentType);
+                dishInfo.push(this.getCurrentName());
+                dishInfo.push(this.getCurrentType());
+                dishInfo.push(this.getCurrentImage());
+                dishInfo.push(this.getPrice());
+                dishInfo.push(this.getInstructions());
                 this.fullMenu.push(id);
                 this.fullMenuDetail.push(dishInfo);
                 this.notifyObservers();
