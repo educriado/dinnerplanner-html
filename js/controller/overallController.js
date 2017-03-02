@@ -23,8 +23,10 @@ var OverallController = function () {
     
     this.showDishDetails = function (id) {
         
-        $("#listScreen").show();
         $("#dishView").hide();
+        $("#listScreen").show();
+        $("#load").show();
+        
     };
     
     this.backButton = function () {

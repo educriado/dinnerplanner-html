@@ -24,10 +24,18 @@ var DishView = function(container, model) {
         var baseUri = results.baseUri,
             results = results.results,
             key;
-        var rowO = $("<div />", {
+        var row0 = [];
+        row0[0] = $("<div />", {
+            "class": "row"
+        });
+        row0[1] = $("<div />", {
+            "class": "row"
+        });
+        row0[2] = $("<div />", {
             "class": "row"
         });
         var dishNum = 0;
+        var i = 0;
         for (key in results) {
             var dishId = results[key].id,
                 title = results[key].title,
@@ -40,21 +48,24 @@ var DishView = function(container, model) {
             imageO.attr("src", baseUri + image);
             imageO.attr("width", imageWidth);
             imageO.attr("height", imageWidth);
-            if (dishNum % 3 === 0) {
+            if (dishNum === 4) {
+                dishNum = 0 ;
                 console.log("Inside modulus 3 if");
                 // Add another row
-
                 var dishViewVar = container.find("#dishViewImage");
-                dishViewVar.append(rowO);
+                dishViewVar.append(row0[i]);
+                i++;
+                
             }
             dishColumn.append(imageO, titleO);
-            rowO.append(dishColumn);
+            row0[i].append(dishColumn);
             dishNum += 1;
         }
         console.log(this);
+        $("#loadDish").hide();
         // We have to get it from the container because using 'this' doesn't work
-        var dishViewVar = container.find("#dishViewImage");
-        dishViewVar.append(rowO);
+        /*var dishViewVar = container.find("#dishViewImage");
+        dishViewVar.append(rowO);*/
     }
 
     function errorCallback(results) {
@@ -62,11 +73,13 @@ var DishView = function(container, model) {
         errorMsg.css("color", "red");
         var dishViewVar = container.find("#dishViewImage");
         dishViewVar.append(errorMsg);
+        $("#loadDish").hide();
     }
 
     this.update = function() {
         console.log(this);
         this.dishView.empty();
+        $("#loadDish").show();
         model.getAllDishes(this.selectType.val(), this.inputSearch.val(), callback,
             errorCallback);
         model.setCurrentType(this.selectType.val());

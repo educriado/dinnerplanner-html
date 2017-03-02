@@ -11,6 +11,8 @@ var DishDetails = function(container, model) {
 
 
     this.update = function() {
+        /*$('#load').show();
+        setTimeout(function() {$('#load').hide()}, 2000);*/
         var id = model.getCurrentSelectedDish();
         var type = model.getCurrentType();
         if (id === 0){
@@ -44,6 +46,7 @@ var DishDetails = function(container, model) {
                     container.find('#preparation').append('<li>'+dish.analyzedInstructions[key].steps[key1].step+'</li>');
                 }
             }
+            $("#load").hide();
         });
     };
 }
