@@ -11,12 +11,12 @@ var DishDetailsController = function (view, model, overallController) {
         var addDish = model.addDishToMenu(id);
         if (addDish === 1) {
             overallController.backButton();
-            model.setCurrentSelectedDish(0);
+            model.setCurrentSelectedDish("0");
         } else {
             var r = confirm('Dish already exist in the menu.');
             if (r == true) {
                 overallController.backButton();
-                model.setCurrentSelectedDish(0);
+                model.setCurrentSelectedDish("0");
             }
         }
 

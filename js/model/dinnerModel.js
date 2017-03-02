@@ -295,7 +295,7 @@ var DinnerModel = function() {
                         dishInfo.push(this.getInstructions());
                         this.fullMenu.push(id);
                         this.fullMenuDetail.push(dishInfo);
-                        this.notifyObservers();
+                        //this.notifyObservers();
                         return 1;
                     } 
                 }
@@ -307,7 +307,7 @@ var DinnerModel = function() {
                 dishInfo.push(this.getInstructions());
                 this.fullMenu.push(id);
                 this.fullMenuDetail.push(dishInfo);
-                this.notifyObservers();
+                //this.notifyObservers();
                 return 1;
             } else {
                 dishInfo.push(id);
@@ -318,11 +318,11 @@ var DinnerModel = function() {
                 dishInfo.push(this.getInstructions());
                 this.fullMenu.push(id);
                 this.fullMenuDetail.push(dishInfo);
-                this.notifyObservers();
+                //this.notifyObservers();
                 return 1;
             }
         } else {
-            this.notifyObservers();
+            //this.notifyObservers();
             return 0;
         }
     };
