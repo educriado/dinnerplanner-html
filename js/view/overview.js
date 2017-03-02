@@ -14,7 +14,7 @@ var OverviewView = function (container, model) {
 
     // Update function called when notified by the model
     this.update = function () {
-        /*console.log("OverviewView: this.update() function gets executed: " + 
+        console.log("OverviewView: this.update() function gets executed: " + 
             this.controlInt);
         this.controlInt += 1;
 
@@ -23,7 +23,7 @@ var OverviewView = function (container, model) {
 
         // Start with new content
         this.numberOfGuests.text("My Dinner: " + model.getNumberOfGuests() + " people");
-        var menu = model.getFullMenu();
+        var menu = model.getFullMenuDetail();
 
         // Divide the 12 column grid in Bootstrap in columns depending
         // on the number of dishes
@@ -35,15 +35,17 @@ var OverviewView = function (container, model) {
         for (var i = 0; i < menu.length; i++) {
             //console.log("For loop iteration number:" + i);
             // Dish info
-            var image = "images/" + menu[i].image,
-                name = menu[i].name,
-                dishPrice = model.getTotalPrice(menu[i].id);
+            var image = menu[i][3],
+                name = menu[i][1],
+                dishPrice = menu[i][4] * model.getNumberOfGuests();
 
             // Fill info
             var imgO = $("<img />"),
                 nameO = $("<h5>" + name + "</h5>"),
-                dishPriceO = $("<p>" + dishPrice + "SEK</p>");
+                dishPriceO = $("<p>" + dishPrice + " SEK</p>");
             imgO.attr("src", image);
+            imgO.attr("width", "150px");
+            imgO.attr("height", "150px");
 
             var dishColumn = $("<div />", {
                 "class": "col-md-" + colWidth
@@ -64,7 +66,7 @@ var OverviewView = function (container, model) {
         menuRow.append(totalPriceColumn);
         
         // Append elements to container (parent)
-        container.find("#overview-dynamic-content").append(menuRow);*/
+        container.find("#overview-dynamic-content").append(menuRow);
     };
 
     // Add ourselves as observer of the model

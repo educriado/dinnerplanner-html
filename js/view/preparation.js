@@ -8,7 +8,7 @@ var PreparationView = function (container, model) {
     this.numberOfGuests = container.find("#people-attending-dinner");
     
     this.update = function () {
-       /* console.log("PreparationView: this.update() function gets executed");
+        console.log("PreparationView: this.update() function gets executed");
         
         // Empty previous content
         container.find("#preparation-dynamic-content").empty();
@@ -16,7 +16,7 @@ var PreparationView = function (container, model) {
         // Start with new content
         this.numberOfGuests.text("My Dinner: " + model.getNumberOfGuests() + " people");
         
-        var menu = model.getFullMenu();
+        var menu = model.getFullMenuDetail();
         
         // Create one row for each dish, with 3 columns for
         // image, name + description, preparation
@@ -26,9 +26,9 @@ var PreparationView = function (container, model) {
             });
             
             // Dish info
-            var image = "images/" + menu[i].image,
-                name = menu[i].name,
-                description = menu[i].description;
+            var image = menu[i][3],
+                name = menu[i][1],
+                description = menu[i][5];
             
             // Fill info
             
@@ -37,6 +37,8 @@ var PreparationView = function (container, model) {
                 "class": "col-md-2"
                 });
             imgO.attr("src", image);
+            imgO.attr("width", "150px");
+            imgO.attr("height", "150px");
             imgColumn.append(imgO);
             
             var nameO = $("<h3>" + name + "</h3>"),
@@ -58,7 +60,7 @@ var PreparationView = function (container, model) {
             
             dishRow.append(imgColumn, nameColumn, preparationColumn);
             container.find("#preparation-dynamic-content").append(dishRow);
-        }*/
+        }
         
     };
     
