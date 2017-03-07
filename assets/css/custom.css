@@ -5,3 +5,11 @@
     float: left;
     margin-right: 5px;
 }
+
+#search-header {
+    height: 30%;
+}
+
+#search-control {
+    height: 60%;
+}
