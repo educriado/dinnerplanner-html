@@ -49,6 +49,18 @@ dinnerPlannerApp.factory('Dinner', function($resource) {
         }
     });
 
+    this.getTotalMenuPrice = function() {
+
+    };
+
+    this.addDishToMenu = function(dish) {
+        fullMenu.push(dish);
+    };
+
+    this.removeDishFromMenu = function() {
+        
+    };
+
 
 
 
