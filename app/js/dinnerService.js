@@ -11,10 +11,9 @@ dinnerPlannerApp.factory('Dinner', function($resource) {
         apiRecipeInformation =
         'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/:id/information';
 
-    var numberOfGuest = 2,
-        fullMenu = [],
-        fullMenuDetail = [],
-        currentSelectedDish = 0;
+    var numberOfGuest = 4,
+        fullMenu = [];
+    
     // Not sure if we need the previous current variables since the data is
     // automatically binded
 
@@ -50,7 +49,7 @@ dinnerPlannerApp.factory('Dinner', function($resource) {
     });
 
     this.getTotalMenuPrice = function() {
-
+        
     };
 
     this.addDishToMenu = function(dish) {
@@ -58,10 +57,15 @@ dinnerPlannerApp.factory('Dinner', function($resource) {
     };
 
     this.removeDishFromMenu = function() {
-        
+        //TODO Lab 2
+        var index = this.fullMenu.indexOf(id);
+        this.fullMenu.splice(index, 1);
+        this.notifyObservers();
     };
 
-
+    this.getTotalMenu = function() {
+        return fullMenu;
+    }
 
 
     // Angular service needs to return an object that has all the
