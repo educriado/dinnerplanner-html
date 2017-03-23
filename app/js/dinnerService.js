@@ -3,25 +3,53 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner',function ($resource) {
 
-  var numberOfGuest = 2;
+dinnerPlannerApp.factory('Dinner', function($resource) {
+  const apiKey = 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB';
+  const apiRecipeSearch =
+        'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search';
+  const apiRecipeInformation =
+        'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/:id/information';
+
+  var numberOfGuest = 4;
+  var fullMenu = [];
+
+    // Not sure if we need the previous current variables since the data is
+    // automatically binded
+
 
 
   this.setNumberOfGuests = function(num) {
     numberOfGuest = num;
-  }
+  };
 
   this.getNumberOfGuests = function() {
     return numberOfGuest;
-  }
+  };
 
 
-  // TODO in Lab 5: Add your model code from previous labs
-  // feel free to remove above example code
-  // you will need to modify the model (getDish and getAllDishes)
-  // a bit to take the advantage of Angular resource service
-  // check lab 5 instructions for details
+
+    // TODO in Lab 5: Add your model code from previous labs
+    // feel free to remove above example code
+    // you will need to modify the model (getDish and getAllDishes)
+    // a bit to take the advantage of Angular resource service
+    // check lab 5 instructions for details
+  this.recipeSearch = $resource(apiRecipeSearch, {}, {
+    get: {
+      headers: {
+        'X-Mashape-Key': apiKey,
+      },
+    },
+  });
+
+
+  this.recipeInfo = $resource(apiRecipeInformation, {}, {
+    get: {
+      headers: {
+        'X-Mashape-Key': apiKey,
+      },
+    },
+  });
 
 
   this.numberOfGuests = 4;
@@ -35,11 +63,6 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   this.currentPrice = 0;
   this.currentInstruction = "";
 
-  const apiKey = "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB",
-      apiRecipeSearch =
-      "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search",
-      apiRecipeInformation =
-      "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/{id}/information";
 
   this.setCurrentType = function(dishType) {
       this.currentType = dishType;
@@ -126,7 +149,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   this.getCurrentSelectedDish = function() {
       return this.currentSelectedDish;
-  }
+  };
 
   //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
   //you can use the filter argument to filter out the dish by name or ingredient (use for search)
@@ -178,7 +201,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   //Returns the dish that is on the menu for selected type
   this.getSelectedDish = function(type) {
       //TODO Lab 2
-      for (key in this.fullMenu) {
+      for (var key in this.fullMenu) {
           if (this.getDish(this.fullMenu[key]).type === type) {
               return this.getDish(this.fullMenu[key]);
           }
@@ -198,7 +221,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   this.getFullMenuDetail = function() {
       return this.fullMenuDetail;
-  }
+  };
 
   //Returns all ingredients for all the dishes on the menu.
   this.getAllIngredients = function() {
@@ -557,10 +580,15 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   }];
 
 
-  // Angular service needs to return an object that has all the
-  // methods created in it. You can consider that this is instead
-  // of calling var model = new DinnerModel() we did in the previous labs
-  // This is because Angular takes care of creating it when needed.
+  this.getTotalMenu = function() {
+    return fullMenu;
+  };
+
+
+    // Angular service needs to return an object that has all the
+    // methods created in it. You can consider that this is instead
+    // of calling var model = new DinnerModel() we did in the previous labs
+    // This is because Angular takes care of creating it when needed.
   return this;
 
 });

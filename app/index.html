@@ -2,16 +2,21 @@
 <!-- Notice the ng-app Angular directive. This tells Angular where the application starts and also
 which module to associate the app with. In app.js we create the "dinnerPlanner" module. -->
 <html lang="en" ng-app="dinnerPlanner">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dinner planner</title>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<<<<<<< HEAD
     <!-- Local CSS -->
     <link href="css/custom.css" rel="stylesheet">
+=======
+    <!-- Our own custom CSS -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/custom.css"> -->
+>>>>>>> b8dd83543747b690618676e6f91ae305982fa091
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
@@ -20,21 +25,31 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> b8dd83543747b690618676e6f91ae305982fa091
     <!-- The application JavaScript code -->
     <script src="js/app.js"></script>
     <script src="js/dinnerService.js"></script>
-    <script src="js/searchCtrl.js"></script>
-    <script src="js/dinnerCtrl.js"></script>
-    <script src="js/dishCtrl.js"></script>
+    <script src="js/searchController.js"></script>
+    <script src="js/dinnerController.js"></script>
+    <script src="js/dishController.js"></script>
+</head>
 
-  </head>
-  <body>
+<body>
     <!-- Here in index.html you should put only the layout that is shared among all the screens (e.g. header
     ,footer, etc.). The rest of the view specific layout will go into the html partials (check partials folder) -->
-
+    <!-- Header goes here -->
+    <header>
+        <div class="page-header">
+            <h1>Homelette <small>From the best chefs in the world directly to your 
+      kitchen</small></h1>
+        </div>
+    </header>
     <!-- ng-view Angular directive is where the partials will be loaded. app.js configures the $routingProvider
     where you specify which partial should be loaded when. -->
+<<<<<<< HEAD
 
     <div class="page-header">
         <h1>Homelette <small>From the best chefs in the world directly to your kitchen</small></h1>
@@ -43,4 +58,9 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
     </div>
 
   </body>
+=======
+    <div ng-view></div>
+</body>
+
+>>>>>>> b8dd83543747b690618676e6f91ae305982fa091
 </html>
