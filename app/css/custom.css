@@ -1,0 +1,24 @@
+body{
+  height: 100vh;
+}
+
+.ng-scope{
+  height: inherit;
+}
+
+#leftMenu{
+  border: 1px solid black;
+  height: 100%;
+  width: 20%;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.rightDiv{
+  border: 1px solid black;
+  border-left: 0px;
+  width: 80%;
+  height: 100%;
+  float: right;
+  text-align: center;
+}
