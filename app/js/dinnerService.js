@@ -3,14 +3,14 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-angular.module('dinnerPlannerApp').factory('Dinner', function($resource) {
+dinnerPlannerApp.factory('Dinner', function($resource) {
   const apiKey = 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB';
   const apiRecipeSearch =
         'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search';
   const apiRecipeInformation =
         'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/:id/information';
 
-  let numberOfGuest = 4;
+  var numberOfGuest = 4;
   var fullMenu = [];
 
     // Not sure if we need the previous current variables since the data is

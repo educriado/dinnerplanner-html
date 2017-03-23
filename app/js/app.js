@@ -9,8 +9,6 @@
 // also see that we included separate JavaScript files for these modules. Angular
 // has other core modules that you might want to use and explore when you go deeper
 // into developing Angular applications. For this lab, these two will suffice.
-// var dinnerPlannerApp = angular.module('dinnerPlanner', ['ngRoute','ngResource']);
-
 
 // Here we configure our application module and more specifically our $routeProvider.
 // Route provider is used to tell angular to load a specific partial (view) for an individual
@@ -36,7 +34,9 @@
 // we access 'http://localhost:8000/#/dish/12345'. The 12345 value will be stored in a dishId
 // parameter, which we can then access through $routeParams service. More information on this in the
 // dishCtrl.js
-angular.module('dinnerPlannerApp').config(['$routeProvider',
+var dinnerPlannerApp = angular.module('dinnerPlanner', ['ngRoute','ngResource']);
+
+dinnerPlannerApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
       .when('/home', {
@@ -44,11 +44,11 @@ angular.module('dinnerPlannerApp').config(['$routeProvider',
       })
       .when('/search', {
         templateUrl: 'partials/search.html',
-        controller: 'SearchCtrl',
+        controller: 'SearchController',
       })
       .when('/dish/:dishId', {
         templateUrl: 'partials/dish.html',
-        controller: 'DishCtrl',
+        controller: 'DishController',
       })
       .when('/overview', {
         templateUrl: 'partials/overview.html',
