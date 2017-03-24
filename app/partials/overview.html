@@ -1,0 +1,28 @@
+<div id="overview-screen">
+  <!-- My Dinner: Number of people attending the dinner -->
+  <div class="page-header">
+  <h2>
+    <span id="people-attending-dinner">My Dinner : {{numberOfGuest}} people</span>
+    <small><a id="go-back-button" ng-href="#!/search" class="btn btn-primary btn-md pull-right" role="button">
+      Go back and edit dinner
+    </a></small>
+  </h2>
+  </div>
+  <div class="container" id="overview-dynamic-content">
+    <div class="row" ng-init="updateOverview()">
+      <div class="col-md-3" ng-repeat="details in detail">
+        <img ng-src="{{details[0]}}" width="150px" height="150px">
+        <h5>{{details[1]}}</h5><p>{{details[2]}} SEK</p>
+      </div>
+      <div class="col-md-3" id="total-price-column">
+        <h5>Total price</h5><p>{{cost}}</p></div>
+      </div>
+  </div>
+  <div class="container text-center">
+      <p>
+          <a id="print-full-recipe-button" ng-href="#!/preparation" class="btn btn-primary btn-lg" role="button">
+          Print full recipe
+          </a>
+      </p>
+  </div>
+  </div>

@@ -1,38 +1,8 @@
 <!-- We include the sidebar as it is shared across two screens. -->
-<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerController"></ng-include>
-
+<ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 <!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
 not support it in free version) and list all the dishes that match the search. -->
 
 <div class="rightDiv">
   <a style="margin-top: 20%;" ng-href="#!/dish/22347" class="btn btn-primary" ng-click="setType()">Get Dish Information</a>
-
-
-<!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
-not support it in free version) and list all the dishes that match the search. -->
-<div class="" id="menu-search">
-    <div id="search-header">
-        <h4 style="margin-left: 30px;">SELECT DISH</h4>
-        <hr style="margin-left: 30px; margin-right: 30px; margin-top: 0px; margin-bottom: 0px; border-top: 2px solid ">
-    </div>
-    <div id="search-control">
-        <input ng-model="query" class="form-control" />
-        <select ng-model="type" name="dishType" ng-change="search(query, type)">
-            <option value="appetizer">Starter</option>
-            <option value="main course">Main</option>
-            <option value="dessert">Dessert</option>
-        </select>
-        <button ng-click="search(query, type)">Search</button>
-    </div>
-</div>
-<div id="result-search">
-    <h3>{{status}}</h3>
-    <ul>
-        <li ng-repeat="dish in dishes">
-            <img ng-src="https://spoonacular.com/recipeImages/{{dish.image}}"
-            height="150" width="150" /> {{dish.title}}
-            <a ng-href="#!/dish/{{dish.id}}">View more</a> Dish ready in {{dish.readyInMinutes}} minutes
-        </li>
-    </ul>
-
 </div>

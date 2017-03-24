@@ -22,3 +22,47 @@ body{
   float: right;
   text-align: center;
 }
+
+tr:hover {
+  background-color: pink;
+}
+
+.page-header {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.row {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+#total-price-column {
+    margin-top: 140px
+}
+
+.img-with-text {
+    text-align: center;
+    width: 128px;
+    background-color: #3276b1;
+    color: #FFFFFF;
+}
+
+.img-with-text img {
+    display: block;
+    margin: 0 auto;
+    background-color: #3276b1;
+    color: #FFFFFF;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #3276b1;
+    border-color: #3276b1;
+}
+
+.btn-outline-primary {
+    color: #3276b1;
+    background-color: #FFFFFF;
+    border-color: #3276b1;
+}

@@ -1,0 +1,25 @@
+<div id="preparation-screen">
+  <div class="page-header">
+      <h2>
+          <span id="people-attending-dinner">My Dinner : {{numberOfGuest}} people</span>
+          <small><a id="go-back-button" ng-href="#!/search" class="btn btn-primary btn-md pull-right" role="button">
+              Go back and edit dinner
+          </a></small>
+      </h2>
+  </div>
+  <div class="container" id="preparation-dynamic-content" ng-init="updatePreparation()">
+    <div class="row" ng-repeat="details in detail">
+      <div class="col-md-2">
+        <img ng-src="{{details[0]}}" width="150px" height="150px">
+      </div>
+      <div class="col-md-4">
+        <h3>{{details[1]}}</h3>
+        <p>{{details[2]}}</p>
+      </div>
+      <div class="col-md-6">
+        <h3>Preparation</h3>
+        <p>{{details[2]}}</p>
+      </div>
+    </div>
+  </div>
+</div>

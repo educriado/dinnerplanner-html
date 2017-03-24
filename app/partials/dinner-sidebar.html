@@ -1,4 +1,3 @@
-
 <!-- People: <input type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)"/> -->
 
 <!-- TODO in Lab 5: Display the items on the menu with cost for each -->
@@ -15,7 +14,7 @@ this with Total price of the menu -->
     </div>
     <div style="height: 10%;">
         <label id="labelNumberOfPeople" for="inputNumberOfPeople" style="margin-left: 30px; padding-top: 5px; float: left;  margin-top: -8px;">People</label>
-        <input ng-model="numberOfGuest" ng-change="setNumberOfGuest()" id="inputNumberOfPeople" type="number" class="form-control" value="{{numberOfGuests}}" style="width: 30%; float: right; margin-right: 50px;  margin-top: -8px;">
+        <input ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)" value="{{numberOfGuests}}" id="inputNumberOfPeople" type="number" class="form-control" style="width: 30%; float: right; margin-right: 50px;  margin-top: -8px;">
     </div>
     <div style="margin-top: -25px; height: 80%;">
         <table id="costTable" class="table">
@@ -25,45 +24,21 @@ this with Total price of the menu -->
                     <th>Cost</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr ng-repeat="fullMenuDetail in fullMenuDetail">
-                  <th>{{fullMenuDetail[0][1]}}</th>
-                  <th>{{fullMenuDetail[0][4]}}</th>
-                </tr>
-                <tr>
-                    <th>Pending</th>
-                    <th id="pendingCost">{{cost}}</th>
+            <tbody ng-repeat="details in detail">
+                <tr id="{{details[0]}}" ng-click="removeDish($event)" class="hoverClass">
+                  <th>{{details[2]}}</th>
+                  <th>{{details[1]}}</th>
                 </tr>
             </tbody>
         </table>
         <hr style="margin-left: 30px; margin-right: 30px; border-top: 2px solid ">
         <div style="text-align: right; padding-right: 35px">
-            <p id="costTablePrice">SEK 0.00</p>
+            <p id="costTablePrice">SEK {{cost}}</p>
         </div>
         <div style="padding-top: 10px; text-align: center;">
             <p>
-                <button id="confirmDinner" type="button" href="overview.html" class="btn btn-outline-primary">Confirm Dinner</button>
+              <a type="button" ng-href="#!/overview" class="btn btn-primary" style="margin-left: 40px">Confirm Dinner</a>
             </p>
         </div>
     </div>
 </div>
-
-<!-- <aside>
-    <h4>My Dinner:</h4>
-    <input type="number" ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)" /> -->
-    <!-- TODO in Lab 5: Display the items on the menu with cost for each -->
-    <!-- Displaying number of guests both in input box and here is redundant. It is here only for the example
-purpose so you can see how some information from the model can be retrieved. In Lab 5 you will replace
-this with Total price of the menu -->
-    <!-- <span class="dish-name">Dish name</span><span class="Cost">Cost</span>
-    <ul>
-        <li ng-repeat="dish in {{getFullMenu()}}">
-            <span class="dish-title">{{dish.title}}</span>
-            <!-- Don't know right now how this will work, we have to do another
-                 API call to get the dish price
-            -->
-            <!-- <span class="dish-price">{{dish.readyInMinutes}}</span>
-        </li>
-    </ul>
-    Total price of menu: {{getTotalPrice()}}
-</aside> -->
