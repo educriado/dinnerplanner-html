@@ -23,7 +23,27 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   // a bit to take the advantage of Angular resource service
   // check lab 5 instructions for details
 
+  const apiKey = "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB",
+      apiRecipeSearch =
+      "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search",
+      apiRecipeInformation =
+      "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/{id}/information";
 
+  this.recipeSearch = $resource(apiRecipeSearch, {}, {
+       get: {
+            headers: {
+                'X-Mashape-Key': apiKey
+            }
+        }
+    });
+
+  this.recipeInfo = $resource(apiRecipeInformation, {}, {
+      get: {
+        headers: {
+          'X-Mashape-Key': apiKey,
+        },
+      },
+    });
 
   this.fullMenu = [];
   this.fullMenuDetail = [];
@@ -35,11 +55,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   this.currentPrice = 0;
   this.currentInstruction = "";
 
-  const apiKey = "Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB",
-      apiRecipeSearch =
-      "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search",
-      apiRecipeInformation =
-      "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/{id}/information";
+
 
   this.setCurrentType = function(dishType) {
       this.currentType = dishType;
