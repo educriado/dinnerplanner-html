@@ -49,7 +49,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   this.fullMenuDetail = [];
   this.observers = [];
   this.currentSelectedDish = 0;
-  this.currentType = "main course";
+  this.currentType = "";
   this.currentDishImage = "";
   this.currentDishName = "";
   this.currentPrice = 0;
