@@ -55,9 +55,17 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
 
   this.fullMenu = [];
   this.fullMenuDetail = [];
+  this.getDetail = function() {
+    this.fullMenuDetail = $cookieStore.get('FullMenuDetail');
+    if(this.fullMenuDetail == undefined){
+      return this.fullMenuDetail = [];
+    }
+    return this.fullMenuDetail;
+  };
+
   this.observers = [];
   this.currentSelectedDish = 0;
-  this.currentType = "Dessert";
+  this.currentType = "";
   this.currentDishImage = "";
   this.currentDishName = "";
   this.currentPrice = 0;
@@ -220,26 +228,39 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
       return allDishes;
   };
 
+  // this.getFullMenuDetail = function() {
+  //   this.detail = $cookieStore.get('LeftMenuDetail');
+  //   $cookieStore.remove('LeftMenuDetail');
+  //   if(this.detail == null || this.detail == undefined){
+  //     this.detail = [];
+  //   }
+  //   for(i = 0; i < this.detail.length; i++){
+  //     if(this.fullMenu.indexOf(this.detail[i][0]) === -1){
+  //       this.addDishToMenu(this.detail[i][0]);
+  //     }
+  //     this.detail = [];
+  //   }
+  //   for (i = 0; i < this.fullMenuDetail.length; i++) {
+  //     var detailInner = [];
+  //     detailInner.push(this.fullMenuDetail[i][0]);
+  //     detailInner.push(this.fullMenuDetail[i][4]);
+  //     detailInner.push(this.fullMenuDetail[i][1]);
+  //     this.detail.push(detailInner);
+  //   }
+  //     $cookieStore.put('LeftMenuDetail', this.detail);
+  //     return this.detail;
+  // }
+
   this.getFullMenuDetail = function() {
-    this.detail = $cookieStore.get('LeftMenuDetail');
-    $cookieStore.remove('LeftMenuDetail');
-    if(this.detail == null || this.detail == undefined){
-      this.detail = [];
-    }
-    for(i = 0; i < this.detail.length; i++){
-      if(this.fullMenu.indexOf(this.detail[i][0]) === -1){
-        this.addDishToMenu(this.detail[i][0]);
-      }
-      this.detail = [];
-    }
-    for (i = 0; i < this.fullMenuDetail.length; i++) {
+    var fullDetailIs = this.getDetail();
+    this.detail = [];
+    for (i = 0; i < this.fullDetailIs.length; i++) {
       var detailInner = [];
-      detailInner.push(this.fullMenuDetail[i][0]);
-      detailInner.push(this.fullMenuDetail[i][4]);
-      detailInner.push(this.fullMenuDetail[i][1]);
+      detailInner.push(this.fullDetailIs[i][0]);
+      detailInner.push(this.fullDetailIs[i][4]);
+      detailInner.push(this.fullDetailIs[i][1]);
       this.detail.push(detailInner);
     }
-      $cookieStore.put('LeftMenuDetail', this.detail);
       return this.detail;
   }
 
@@ -312,7 +333,11 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
                       dishInfo.push(this.getPrice());
                       dishInfo.push(this.getInstructions());
                       this.fullMenu.push(id);
+                      $cookieStore.remove('FullMenu', fullMenu);
+                      $cookieStore.put('FullMenu', fullMenu);
                       this.fullMenuDetail.push(dishInfo);
+                      $cookieStore.remove('FullMenuDetail', fullMenuDetail);
+                      $cookieStore.put('FullMenuDetail', fullMenuDetail);
                       return 1;
                   }
               }
@@ -323,7 +348,11 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
               dishInfo.push(this.getPrice());
               dishInfo.push(this.getInstructions());
               this.fullMenu.push(id);
+              $cookieStore.remove('FullMenu', fullMenu);
+              $cookieStore.put('FullMenu', fullMenu);
               this.fullMenuDetail.push(dishInfo);
+              $cookieStore.remove('FullMenuDetail', fullMenuDetail);
+              $cookieStore.put('FullMenuDetail', fullMenuDetail);
               return 1;
           } else {
               dishInfo.push(id);
@@ -333,7 +362,11 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
               dishInfo.push(this.getPrice());
               dishInfo.push(this.getInstructions());
               this.fullMenu.push(id);
+              $cookieStore.remove('FullMenu', fullMenu);
+              $cookieStore.put('FullMenu', fullMenu);
               this.fullMenuDetail.push(dishInfo);
+              $cookieStore.remove('FullMenuDetail', fullMenuDetail);
+              $cookieStore.put('FullMenuDetail', fullMenuDetail);
               return 1;
           }
       } else {
@@ -347,6 +380,10 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
       var index = this.fullMenu.indexOf(id);
       this.fullMenu.splice(index, 1);
       this.fullMenuDetail.splice(index, 1);
+      $cookieStore.remove('FullMenu', fullMenu);
+      $cookieStore.put('FullMenu', fullMenu);
+      $cookieStore.remove('FullMenuDetail', fullMenuDetail);
+      $cookieStore.put('FullMenuDetail', fullMenuDetail);
   };
 
   // the dishes variable contains an array of all the
