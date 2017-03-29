@@ -55,12 +55,13 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
 
   this.fullMenu = [];
   this.fullMenuDetail = [];
-  this.getDetail = function() {
-    this.fullMenuDetail = $cookieStore.get('FullMenuDetail');
-    if(this.fullMenuDetail == undefined){
-      return this.fullMenuDetail = [];
+
+  this.getMenuCookie = function () {
+    var cookieContent = $cookieStore.get('FullMenuDetail');
+    if (cookieContent == null) {
+      cookieContent = [];
     }
-    return this.fullMenuDetail;
+    return cookieContent;
   };
 
   this.observers = [];
@@ -252,16 +253,16 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   // }
 
   this.getFullMenuDetail = function() {
-    var fullDetailIs = this.getDetail();
+    var fullDetailIs = this.getMenuCookie();
     this.detail = [];
-    for (i = 0; i < this.fullDetailIs.length; i++) {
+    for (i = 0; i < fullDetailIs.length; i++) {
       var detailInner = [];
-      detailInner.push(this.fullDetailIs[i][0]);
-      detailInner.push(this.fullDetailIs[i][4]);
-      detailInner.push(this.fullDetailIs[i][1]);
+      detailInner.push(fullDetailIs[i][0]);
+      detailInner.push(fullDetailIs[i][4]);
+      detailInner.push(fullDetailIs[i][1]);
       this.detail.push(detailInner);
     }
-      return this.detail;
+    return this.detail;
   }
 
   //Returns all ingredients for all the dishes on the menu.
@@ -333,11 +334,11 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
                       dishInfo.push(this.getPrice());
                       dishInfo.push(this.getInstructions());
                       this.fullMenu.push(id);
-                      $cookieStore.remove('FullMenu', fullMenu);
-                      $cookieStore.put('FullMenu', fullMenu);
+                      $cookieStore.remove('FullMenu');
+                      $cookieStore.put('FullMenu', this.fullMenu);
                       this.fullMenuDetail.push(dishInfo);
-                      $cookieStore.remove('FullMenuDetail', fullMenuDetail);
-                      $cookieStore.put('FullMenuDetail', fullMenuDetail);
+                      $cookieStore.remove('FullMenuDetail');
+                      $cookieStore.put('FullMenuDetail', this.fullMenuDetail);
                       return 1;
                   }
               }
@@ -348,11 +349,11 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
               dishInfo.push(this.getPrice());
               dishInfo.push(this.getInstructions());
               this.fullMenu.push(id);
-              $cookieStore.remove('FullMenu', fullMenu);
-              $cookieStore.put('FullMenu', fullMenu);
+              $cookieStore.remove('FullMenu');
+              $cookieStore.put('FullMenu', this.fullMenu);
               this.fullMenuDetail.push(dishInfo);
-              $cookieStore.remove('FullMenuDetail', fullMenuDetail);
-              $cookieStore.put('FullMenuDetail', fullMenuDetail);
+              $cookieStore.remove('FullMenuDetail');
+              $cookieStore.put('FullMenuDetail', this.fullMenuDetail);
               return 1;
           } else {
               dishInfo.push(id);
@@ -362,11 +363,11 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
               dishInfo.push(this.getPrice());
               dishInfo.push(this.getInstructions());
               this.fullMenu.push(id);
-              $cookieStore.remove('FullMenu', fullMenu);
-              $cookieStore.put('FullMenu', fullMenu);
+              $cookieStore.remove('FullMenu');
+              $cookieStore.put('FullMenu', this.fullMenu);
               this.fullMenuDetail.push(dishInfo);
-              $cookieStore.remove('FullMenuDetail', fullMenuDetail);
-              $cookieStore.put('FullMenuDetail', fullMenuDetail);
+              $cookieStore.remove('FullMenuDetail');
+              $cookieStore.put('FullMenuDetail', this.fullMenuDetail);
               return 1;
           }
       } else {
@@ -380,10 +381,10 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
       var index = this.fullMenu.indexOf(id);
       this.fullMenu.splice(index, 1);
       this.fullMenuDetail.splice(index, 1);
-      $cookieStore.remove('FullMenu', fullMenu);
-      $cookieStore.put('FullMenu', fullMenu);
-      $cookieStore.remove('FullMenuDetail', fullMenuDetail);
-      $cookieStore.put('FullMenuDetail', fullMenuDetail);
+      $cookieStore.remove('FullMenu');
+      $cookieStore.put('FullMenu', this.fullMenu);
+      $cookieStore.remove('FullMenuDetail');
+      $cookieStore.put('FullMenuDetail', this.fullMenuDetail);
   };
 
   // the dishes variable contains an array of all the
