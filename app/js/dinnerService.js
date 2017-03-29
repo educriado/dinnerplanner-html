@@ -185,8 +185,10 @@ dinnerPlannerApp.factory('Dinner', function ($resource, $cookieStore) {
   // }
 
   this.getFullMenuDetail = function() {
+    console.log('Getting full menu details.');
     var fullDetailIs = this.getMenuCookie();
     this.detail = [];
+    var i;
     for (i = 0; i < fullDetailIs.length; i++) {
       var detailInner = [];
       detailInner.push(fullDetailIs[i][0]);
@@ -195,7 +197,7 @@ dinnerPlannerApp.factory('Dinner', function ($resource, $cookieStore) {
       this.detail.push(detailInner);
     }
     return this.detail;
-  }
+  };
 
   //Returns all ingredients for all the dishes on the menu.
   this.getAllIngredients = function() {
@@ -252,7 +254,7 @@ dinnerPlannerApp.factory('Dinner', function ($resource, $cookieStore) {
       // Check same type (this includes same dish)
     var index;
     var added = false;
-    for (index = 0; index < fullMenu.length; fullMenu++) {
+    for (index = 0; index < this.fullMenu.length; this.fullMenu++) {
       if(this.fullMenuDetail[key][2] === this.currentType) {
         // Same type as some dish, remove and add new one
         this.removeDishFromMenu(this.fullMenu[key]);
@@ -267,20 +269,23 @@ dinnerPlannerApp.factory('Dinner', function ($resource, $cookieStore) {
         $cookieStore.remove('FullMenuDetail');
         $cookieStore.put('FullMenuDetail', this.fullMenuDetail);
         added = true;
+        console.log('Replaced same type dish, new one: ' + id);
       }
     }
-    // Didn't find same type or empty, just add
+    // Didn't find same type or empty menu, just add
     if(added === false) {
-      // Add ID
+        console.log('Dish wasnt present/empty menu, adding.');
+        // Add ID
         this.fullMenu.push(id);
         // Add details
-        this.fullMenuDetail.push([this.currentDishName, this.currentType, this.currentDishImage,
+        this.fullMenuDetail.push([id, this.currentDishName, this.currentType, this.currentDishImage,
                                   this.currentPrice, this.currentInstruction]);
         // Handle cookies
         $cookieStore.remove('FullMenu');
         $cookieStore.put('FullMenu', this.fullMenu);
         $cookieStore.remove('FullMenuDetail');
         $cookieStore.put('FullMenuDetail', this.fullMenuDetail);
+        console.log('Added dish to menu: ' + id);
     }
   }
 
