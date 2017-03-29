@@ -5,9 +5,12 @@
 // the next time.
 dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
 
-  this.numberOfGuest = 4;
-  $cookieStore.put('numberOfGuest', this.numberOfGuest);
-
+  // $cookieStore.put('numberOfGuest', 4)
+  this.numberOfGuest = $cookieStore.get('numberOfGuest');
+  if (this.numberOfGuest == null) {
+    this.numberOfGuest = 4;
+    $cookieStore.put('numberOfGuest', this.numberOfGuest);
+  }
 
   this.setNumberOfGuests = function(num) {
     this.numberOfGuest = num;
@@ -15,6 +18,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   };
 
   this.getNumberOfGuests = function() {
+    console.log('Return cookie.');
     return $cookieStore.get('numberOfGuest');
   };
 
