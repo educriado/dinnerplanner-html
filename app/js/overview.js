@@ -4,6 +4,7 @@ dinnerPlannerApp.controller('OverviewCtrl', function ($scope,$routeParams,Dinner
 
   $scope.updateOverview = function() {
     var numberOfGuests = Dinner.getNumberOfGuests();
+    var i;
     $scope.detail = [];
     $scope.cost = 0;
     $scope.fullMenuDetail = Dinner.getFullMenuDetail();
