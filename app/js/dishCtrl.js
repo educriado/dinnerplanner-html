@@ -28,9 +28,9 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
    };
 
    $scope.confirmDish = function() {
-      Dinner.setCurrentType("0");
       Dinner.addDishToMenu($routeParams.dishId);
       alert("Dish successfully added to the menu.");
+      Dinner.setCurrentType("0");
    };
 
 });

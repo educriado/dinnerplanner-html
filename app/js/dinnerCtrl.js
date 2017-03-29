@@ -38,7 +38,7 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
   $scope.removeDish = function(event) {
     var r = confirm("Do you want to remove this dish?");
     if(r === true){
-      Dinner.removeDishFromMenu(event.target.id);
+      Dinner.removeDishFromMenu(event.currentTarget.id);
       $scope.updateLeftMenu();
     }
   };
