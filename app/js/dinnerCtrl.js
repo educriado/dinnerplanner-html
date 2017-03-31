@@ -20,7 +20,12 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
   // TODO in Lab 5: Implement the methods to get the dinner menu
   // add dish to menu and get total menu price
 
+  $scope.checkCookie = function() {
+    Dinner.getFullMenuDetailonLoad();
+  };
+
   $scope.updateLeftMenu = function() {
+    Dinner.getFullMenuDetailonLoad();
     var numberOfGuest = Dinner.getNumberOfGuests();
     $scope.detail = [];
     $scope.cost = 0;

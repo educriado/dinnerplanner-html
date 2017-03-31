@@ -8,7 +8,7 @@ purpose so you can see how some information from the model can be retrieved. In 
 this with Total price of the menu -->
 <!-- Total number of guest: {{getNumberOfGuests()}} -->
 
-<div id="leftMenu" ng-init="updateLeftMenu()">
+<div id="leftMenu" ng-init="checkCookie()">
     <div style="height: 10%;">
         <h3 style="padding-left: 20px; margin-top: 10px; margin-bottom: 0px;">My Dinner</h3>
     </div>
@@ -16,7 +16,7 @@ this with Total price of the menu -->
         <label id="labelNumberOfPeople" for="inputNumberOfPeople" style="margin-left: 30px; padding-top: 5px; float: left;  margin-top: -8px;">People</label>
         <input ng-model="numberOfGuests" ng-change="setNumberOfGuest(numberOfGuests)" value="{{numberOfGuests}}" id="inputNumberOfPeople" type="number" class="form-control" style="width: 30%; float: right; margin-right: 50px;  margin-top: -8px;">
     </div>
-    <div style="margin-top: -25px; height: 80%;">
+    <div style="margin-top: -25px; height: 80%;" ng-init="updateLeftMenu()">
         <table id="costTable" class="table">
             <thead>
                 <tr style="background-color: #3276b1; color: #FFFFFF;">

@@ -23,7 +23,7 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
   this.currentDishName = "";
   this.currentPrice = 0;
   this.currentInstruction = "";
-
+  var _self = this;
   // Number of guests is retrieved by a cookie
   this.numberOfGuest = $cookieStore.get('numberOfGuest');
   console.log('Trying to retrieve numberOfGuest cookie.');
@@ -200,19 +200,57 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
   //   return this.detail;
   // };
 
-  this.getFullMenuDetail = function() {
+  this.getFullMenuDetailonLoad = function() {
     if(this.fullMenu.length === 0){
+      this.fullMenu = [];
       if($cookieStore.get('FullMenu').length != 0){
         this.fullMenu = $cookieStore.get('FullMenu');
         this.typeDish = $cookieStore.get('TypeDish');
         for (var i = 0; i < this.fullMenu.length; i++) {
-          this.addDishFromCookie(this.fullMenu[i], i);
+          var id = this.fullMenu[i];
+          // var result = this.addDishFromCookie(this.fullMenu[i], i);
+          var dishInfo = [];
+          var detailAPI = [];
+          var type = this.typeDish[i];
+          this.Dish.get({id:id},function(data){
+            var price = 0;
+            var instructions=data.analyzedInstructions[0].steps;
+            for(var key in instructions){
+              price++;
+            }
+            console.log(data);
+            dishInfo.push(id);
+            dishInfo.push(data.title);
+            dishInfo.push(type);
+            dishInfo.push(data.image);
+            dishInfo.push(price);
+            dishInfo.push(instructions);
+            console.log(dishInfo);
+            // setFullMenuDetail(dishInfo);
+            _self.fullMenuDetail.push(dishInfo);
+            // var result = setFullMenuDetail(dishInfo);
+          },function(data){
+            alert("There was an error.");
+          });
+          var test = 0;
         }
       }
     }
+    // this.detail = [];
+    // var i;
+    // for (i = 0; i < this.fullMenuDetail.length; i++) {
+    //   var detailInner = [];
+    //   detailInner.push(this.fullMenuDetail[i][0]);
+    //   detailInner.push(this.fullMenuDetail[i][4]);
+    //   detailInner.push(this.fullMenuDetail[i][1]);
+    //   this.detail.push(detailInner);
+    // }
+    // return this.detail;
+  };
+
+  this.getFullMenuDetail = function() {
     this.detail = [];
-    var i;
-    for (i = 0; i < this.fullMenuDetail.length; i++) {
+    for (var i = 0; i < this.fullMenuDetail.length; i++) {
       var detailInner = [];
       detailInner.push(this.fullMenuDetail[i][0]);
       detailInner.push(this.fullMenuDetail[i][4]);
@@ -222,31 +260,33 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     return this.detail;
   };
 
-  this.addDishFromCookie = function (id, keyType) {
-    var dishInfo = [];
-    var detailAPI = [];
-    var type = this.typeDish[keyType];
-    this.Dish.get({id:id},function(data){
-      var price = 0;
-      var instructions=data.analyzedInstructions[0].steps;
-      for(var key in instructions){
-        price++;
-      }
-      dishInfo.push(id);
-      dishInfo.push(data.title);
-      dishInfo.push(type);
-      dishInfo.push(data.image);
-      dishInfo.push(price);
-      dishInfo.push(instructions);
-      this.setFullMenuDetail(dishInfo);
-    },function(data){
-      alert("There was an error.");
-    });
-    // this.fullMenuDetail.push(menuDetail);
-  }
+  // this.addDishFromCookie = function (id, keyType) {
+  //   var dishInfo = [];
+  //   var detailAPI = [];
+  //   var type = this.typeDish[keyType];
+  //   this.Dish.get({id:id},function(data){
+  //     var price = 0;
+  //     var instructions=data.analyzedInstructions[0].steps;
+  //     for(var key in instructions){
+  //       price++;
+  //     }
+  //     dishInfo.push(id);
+  //     dishInfo.push(data.title);
+  //     dishInfo.push(type);
+  //     dishInfo.push(data.image);
+  //     dishInfo.push(price);
+  //     dishInfo.push(instructions);
+  //     var result = setFullMenuDetail(dishInfo);
+  //   },function(data){
+  //     alert("There was an error.");
+  //   });
+  //   return 1 ;
+  //   // this.fullMenuDetail.push(menuDetail);
+  // }
 
-  this.setFullMenuDetail = function (dishInfo) {
-    this.fullMenuDetail.push(dishInfo);
+  var setFullMenuDetail = function (dishInfo) {
+    _self.fullMenuDetail.push(dishInfo);
+    console.log(_self.fullMenuDetail);
   }
 
   //Returns all ingredients for all the dishes on the menu.
