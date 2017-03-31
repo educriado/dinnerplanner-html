@@ -33,6 +33,13 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     $cookieStore.put('numberOfGuest', this.numberOfGuest);
   }
 
+  this.fullMenuDetailCookie = $cookieStore.get('FullMenu');
+  console.log('Trying to retrieve numberOfGuest cookie.');
+  if (this.fullMenuDetailCookie == null) {
+    console.log('Cookie didnt exists, creating it.');
+    this.fullMenuDetailCookie = [];
+  }
+
   this.setNumberOfGuests = function(num) {
     this.numberOfGuest = num;
     $cookieStore.put('numberOfGuest', num);
@@ -200,42 +207,9 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
   //   return this.detail;
   // };
 
-  this.getFullMenuDetailonLoad = function() {
-    if(this.fullMenu.length === 0){
-      this.fullMenu = [];
-      if($cookieStore.get('FullMenu').length != 0){
-        this.fullMenu = $cookieStore.get('FullMenu');
-        this.typeDish = $cookieStore.get('TypeDish');
-        for (var i = 0; i < this.fullMenu.length; i++) {
-          var id = this.fullMenu[i];
-          // var result = this.addDishFromCookie(this.fullMenu[i], i);
-          var dishInfo = [];
-          var detailAPI = [];
-          var type = this.typeDish[i];
-          this.Dish.get({id:id},function(data){
-            var price = 0;
-            var instructions=data.analyzedInstructions[0].steps;
-            for(var key in instructions){
-              price++;
-            }
-            console.log(data);
-            dishInfo.push(id);
-            dishInfo.push(data.title);
-            dishInfo.push(type);
-            dishInfo.push(data.image);
-            dishInfo.push(price);
-            dishInfo.push(instructions);
-            console.log(dishInfo);
-            // setFullMenuDetail(dishInfo);
-            _self.fullMenuDetail.push(dishInfo);
-            // var result = setFullMenuDetail(dishInfo);
-          },function(data){
-            alert("There was an error.");
-          });
-          var test = 0;
-        }
-      }
-    }
+  //this.getFullMenuDetailonLoad = function() {
+
+    //}
     // this.detail = [];
     // var i;
     // for (i = 0; i < this.fullMenuDetail.length; i++) {
@@ -246,7 +220,7 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     //   this.detail.push(detailInner);
     // }
     // return this.detail;
-  };
+  // };
 
   this.getFullMenuDetail = function() {
     this.detail = [];
@@ -451,6 +425,43 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     this.fullMenu.splice(index, 1);
     this.fullMenuDetail.splice(index, 1);
   };
+
+  if(this.fullMenu.length === 0){
+    this.fullMenu = [];
+    if(this.fullMenuDetailCookie.length != 0){
+      this.fullMenu = $cookieStore.get('FullMenu');
+      this.typeDish = $cookieStore.get('TypeDish');
+      for (var i = 0; i < this.fullMenu.length; i++) {
+        var id = this.fullMenu[i];
+        // var result = this.addDishFromCookie(this.fullMenu[i], i);
+        var dishInfo = [];
+        var detailAPI = [];
+        var type = this.typeDish[i];
+        this.Dish.get({id:id}, function(data){
+          var price = 0;
+          var instructions=data.analyzedInstructions[0].steps;
+          for(var key in instructions){
+            price++;
+          }
+          console.log(data);
+          dishInfo.push(id);
+          dishInfo.push(data.title);
+          dishInfo.push(type);
+          dishInfo.push(data.image);
+          dishInfo.push(price);
+          dishInfo.push(instructions);
+          console.log(dishInfo);
+          // setFullMenuDetail(dishInfo);
+          _self.fullMenuDetail.push(dishInfo);
+          // var result = setFullMenuDetail(dishInfo);
+        }, function(data){
+          alert("There was an error.");
+        });
+      }
+      // WE HAVE ALL THE INFO ABOUT THE dishes
+
+    }
+  }
 
   // Angular service needs to return an object that has all the
   // methods created in it. You can consider that this is instead
