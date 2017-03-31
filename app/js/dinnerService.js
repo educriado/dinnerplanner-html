@@ -34,7 +34,7 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
   }
 
   this.fullMenuDetailCookie = $cookieStore.get('FullMenu');
-  console.log('Trying to retrieve numberOfGuest cookie.');
+  console.log('Trying to retrieve fullMenuDetail cookie.');
   if (this.fullMenuDetailCookie == null) {
     console.log('Cookie didnt exists, creating it.');
     this.fullMenuDetailCookie = [];
@@ -209,17 +209,17 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
 
   //this.getFullMenuDetailonLoad = function() {
 
-    //}
-    // this.detail = [];
-    // var i;
-    // for (i = 0; i < this.fullMenuDetail.length; i++) {
-    //   var detailInner = [];
-    //   detailInner.push(this.fullMenuDetail[i][0]);
-    //   detailInner.push(this.fullMenuDetail[i][4]);
-    //   detailInner.push(this.fullMenuDetail[i][1]);
-    //   this.detail.push(detailInner);
-    // }
-    // return this.detail;
+  //}
+  // this.detail = [];
+  // var i;
+  // for (i = 0; i < this.fullMenuDetail.length; i++) {
+  //   var detailInner = [];
+  //   detailInner.push(this.fullMenuDetail[i][0]);
+  //   detailInner.push(this.fullMenuDetail[i][4]);
+  //   detailInner.push(this.fullMenuDetail[i][1]);
+  //   this.detail.push(detailInner);
+  // }
+  // return this.detail;
   // };
 
   this.getFullMenuDetail = function() {
@@ -258,7 +258,7 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
   //   // this.fullMenuDetail.push(menuDetail);
   // }
 
-  var setFullMenuDetail = function (dishInfo) {
+  var setFullMenuDetail = function(dishInfo) {
     _self.fullMenuDetail.push(dishInfo);
     console.log(_self.fullMenuDetail);
   }
@@ -357,65 +357,65 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
 
 
   this.addDishToMenu = function(id) {
-      //TODO use $cookieStore to save info about the menu
-      console.log("Added dish:" + id);
-      var key;
-      var dishInfo = [];
-      if(this.fullMenu.indexOf(id) === -1) {
-          var dishType = this.getCurrentType();
-          if(this.fullMenu.length > 0){
-              for(key in this.fullMenu){
-                  if(this.fullMenuDetail[key][2] === dishType){
-                      this.removeDishFromMenu(this.fullMenu[key]);
-                      dishInfo.push(id);
-                      dishInfo.push(this.getCurrentName());
-                      dishInfo.push(this.getCurrentType());
-                      dishInfo.push(this.getCurrentImage());
-                      dishInfo.push(this.getPrice());
-                      dishInfo.push(this.getInstructions());
-                      this.fullMenu.push(id);
-                      this.typeDish.push(this.getCurrentType())
-                      $cookieStore.remove('FullMenu', this.fullMenu);
-                      $cookieStore.remove('TypeDish', this.typeDish);
-                      $cookieStore.put('FullMenu', this.fullMenu);
-                      $cookieStore.put('TypeDish', this.typeDish);
-                      this.fullMenuDetail.push(dishInfo);
-                      return 1;
-                  }
-              }
-              dishInfo.push(id);
-              dishInfo.push(this.getCurrentName());
-              dishInfo.push(this.getCurrentType());
-              dishInfo.push(this.getCurrentImage());
-              dishInfo.push(this.getPrice());
-              dishInfo.push(this.getInstructions());
-              this.fullMenu.push(id);
-              this.typeDish.push(this.getCurrentType())
-              $cookieStore.remove('FullMenu', this.fullMenu);
-              $cookieStore.remove('TypeDish', this.typeDish);
-              $cookieStore.put('FullMenu', this.fullMenu);
-              $cookieStore.put('TypeDish', this.typeDish);
-              this.fullMenuDetail.push(dishInfo);
-              return 1;
-          } else {
-              dishInfo.push(id);
-              dishInfo.push(this.getCurrentName());
-              dishInfo.push(this.getCurrentType());
-              dishInfo.push(this.getCurrentImage());
-              dishInfo.push(this.getPrice());
-              dishInfo.push(this.getInstructions());
-              this.fullMenu.push(id);
-              this.typeDish.push(this.getCurrentType())
-              $cookieStore.remove('FullMenu', this.fullMenu);
-              $cookieStore.remove('TypeDish', this.typeDish);
-              $cookieStore.put('FullMenu', this.fullMenu);
-              $cookieStore.put('TypeDish', this.typeDish);
-              this.fullMenuDetail.push(dishInfo);
-              return 1;
+    //TODO use $cookieStore to save info about the menu
+    console.log("Added dish:" + id);
+    var key;
+    var dishInfo = [];
+    if (this.fullMenu.indexOf(id) === -1) {
+      var dishType = this.getCurrentType();
+      if (this.fullMenu.length > 0) {
+        for (key in this.fullMenu) {
+          if (this.fullMenuDetail[key][2] === dishType) {
+            this.removeDishFromMenu(this.fullMenu[key]);
+            dishInfo.push(id);
+            dishInfo.push(this.getCurrentName());
+            dishInfo.push(this.getCurrentType());
+            dishInfo.push(this.getCurrentImage());
+            dishInfo.push(this.getPrice());
+            dishInfo.push(this.getInstructions());
+            this.fullMenu.push(id);
+            this.typeDish.push(this.getCurrentType())
+            $cookieStore.remove('FullMenu', this.fullMenu);
+            $cookieStore.remove('TypeDish', this.typeDish);
+            $cookieStore.put('FullMenu', this.fullMenu);
+            $cookieStore.put('TypeDish', this.typeDish);
+            this.fullMenuDetail.push(dishInfo);
+            return 1;
           }
+        }
+        dishInfo.push(id);
+        dishInfo.push(this.getCurrentName());
+        dishInfo.push(this.getCurrentType());
+        dishInfo.push(this.getCurrentImage());
+        dishInfo.push(this.getPrice());
+        dishInfo.push(this.getInstructions());
+        this.fullMenu.push(id);
+        this.typeDish.push(this.getCurrentType())
+        $cookieStore.remove('FullMenu', this.fullMenu);
+        $cookieStore.remove('TypeDish', this.typeDish);
+        $cookieStore.put('FullMenu', this.fullMenu);
+        $cookieStore.put('TypeDish', this.typeDish);
+        this.fullMenuDetail.push(dishInfo);
+        return 1;
       } else {
-          return 0;
+        dishInfo.push(id);
+        dishInfo.push(this.getCurrentName());
+        dishInfo.push(this.getCurrentType());
+        dishInfo.push(this.getCurrentImage());
+        dishInfo.push(this.getPrice());
+        dishInfo.push(this.getInstructions());
+        this.fullMenu.push(id);
+        this.typeDish.push(this.getCurrentType())
+        $cookieStore.remove('FullMenu', this.fullMenu);
+        $cookieStore.remove('TypeDish', this.typeDish);
+        $cookieStore.put('FullMenu', this.fullMenu);
+        $cookieStore.put('TypeDish', this.typeDish);
+        this.fullMenuDetail.push(dishInfo);
+        return 1;
       }
+    } else {
+      return 0;
+    }
   };
 
   //Removes dish from menu
@@ -425,41 +425,43 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     this.fullMenu.splice(index, 1);
     this.fullMenuDetail.splice(index, 1);
   };
-
-  if(this.fullMenu.length === 0){
-    this.fullMenu = [];
-    if(this.fullMenuDetailCookie.length != 0){
-      this.fullMenu = $cookieStore.get('FullMenu');
-      this.typeDish = $cookieStore.get('TypeDish');
-      for (var i = 0; i < this.fullMenu.length; i++) {
-        var id = this.fullMenu[i];
-        // var result = this.addDishFromCookie(this.fullMenu[i], i);
-        var dishInfo = [];
-        var detailAPI = [];
-        var type = this.typeDish[i];
-        this.Dish.get({id:id}, function(data){
-          var price = 0;
-          var instructions=data.analyzedInstructions[0].steps;
-          for(var key in instructions){
-            price++;
-          }
-          console.log(data);
-          dishInfo.push(id);
-          dishInfo.push(data.title);
-          dishInfo.push(type);
-          dishInfo.push(data.image);
-          dishInfo.push(price);
-          dishInfo.push(instructions);
-          console.log(dishInfo);
-          // setFullMenuDetail(dishInfo);
-          _self.fullMenuDetail.push(dishInfo);
-          // var result = setFullMenuDetail(dishInfo);
-        }, function(data){
-          alert("There was an error.");
-        });
+  
+  this.fullMenuCookie = function (callback) {
+    if (this.fullMenu.length === 0) {
+      this.fullMenu = [];
+      if (this.fullMenuDetailCookie.length != 0) {
+        this.fullMenu = $cookieStore.get('FullMenu');
+        this.typeDish = $cookieStore.get('TypeDish');
+        for (var i = 0; i < this.fullMenu.length; i++) {
+          var id = this.fullMenu[i];
+          // var result = this.addDishFromCookie(this.fullMenu[i], i);
+          var dishInfo = [];
+          var detailAPI = [];
+          var type = this.typeDish[i];
+          this.Dish.get({ id: id }, function(data) {
+            var price = 0;
+            var instructions = data.analyzedInstructions[0].steps;
+            for (var key in instructions) {
+              price++;
+            }
+            console.log(data);
+            dishInfo.push(id);
+            dishInfo.push(data.title);
+            dishInfo.push(type);
+            dishInfo.push(data.image);
+            dishInfo.push(price);
+            dishInfo.push(instructions);
+            console.log(dishInfo);
+            // setFullMenuDetail(dishInfo);
+            _self.fullMenuDetail.push(dishInfo);
+            // var result = setFullMenuDetail(dishInfo);
+            callback();
+          }, function(data) {
+            alert("There was an error.");
+          });
+        }
+        // WE HAVE ALL THE INFO ABOUT THE dishes
       }
-      // WE HAVE ALL THE INFO ABOUT THE dishes
-
     }
   }
 

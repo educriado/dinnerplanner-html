@@ -24,7 +24,7 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
   //   Dinner.getFullMenuDetailonLoad();
   // };
 
-  $scope.updateLeftMenu = function() {
+  function callback(){
     var numberOfGuest = Dinner.getNumberOfGuests();
     $scope.detail = [];
     $scope.cost = 0;
@@ -36,7 +36,11 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
       $scope.cost += $scope.fullMenuDetail[i][1] * numberOfGuest;
       detailInner.push($scope.fullMenuDetail[i][2]);
       $scope.detail.push(detailInner);
-    }
+      }
+  }
+
+  $scope.updateLeftMenu = function() {
+    Dinner.fullMenuCookie(callback);
   };
 
   $scope.removeDish = function(event) {
