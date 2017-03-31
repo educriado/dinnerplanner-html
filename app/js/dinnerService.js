@@ -424,26 +424,34 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     var index = this.fullMenu.indexOf(id);
     this.fullMenu.splice(index, 1);
     this.fullMenuDetail.splice(index, 1);
+    $cookieStore.remove('FullMenu', this.fullMenu);
+    $cookieStore.remove('TypeDish', this.typeDish);
+    $cookieStore.put('FullMenu', this.fullMenu);
+    $cookieStore.put('TypeDish', this.typeDish);
   };
-  
+
   this.fullMenuCookie = function (callback) {
     if (this.fullMenu.length === 0) {
       this.fullMenu = [];
+      this.fullMenuCookieAllIds = [];
       if (this.fullMenuDetailCookie.length != 0) {
-        this.fullMenu = $cookieStore.get('FullMenu');
+        this.fullMenuCookieAllIds = $cookieStore.get('FullMenu');
         this.typeDish = $cookieStore.get('TypeDish');
-        for (var i = 0; i < this.fullMenu.length; i++) {
-          var id = this.fullMenu[i];
+        for (var i = 0; i < this.fullMenuCookieAllIds.length; i++) {
+          var id = this.fullMenuCookieAllIds[i];
+          // this.fullMenu.push(this.fullMenuCookieAllIds[i]);
           // var result = this.addDishFromCookie(this.fullMenu[i], i);
-          var dishInfo = [];
+          // var dishInfo = [];
           var detailAPI = [];
           var type = this.typeDish[i];
           this.Dish.get({ id: id }, function(data) {
+            var dishInfo = [];
             var price = 0;
             var instructions = data.analyzedInstructions[0].steps;
             for (var key in instructions) {
               price++;
             }
+            console.log("test");
             console.log(data);
             dishInfo.push(id);
             dishInfo.push(data.title);
@@ -454,15 +462,24 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
             console.log(dishInfo);
             // setFullMenuDetail(dishInfo);
             _self.fullMenuDetail.push(dishInfo);
+            console.log(_self.fullMenuDetail);
             // var result = setFullMenuDetail(dishInfo);
-            callback();
+            _self.fullMenu.push(id);
+            if(_self.fullMenu.length === _self.fullMenuCookieAllIds.length){
+              console.log(_self.fullMenuDetail);
+              callback();
+            }
+
           }, function(data) {
             alert("There was an error.");
           });
         }
         // WE HAVE ALL THE INFO ABOUT THE dishes
       }
+    }else{
+      callback();
     }
+      // callback();
   }
 
   // Angular service needs to return an object that has all the
