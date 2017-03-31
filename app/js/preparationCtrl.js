@@ -6,7 +6,7 @@ dinnerPlannerApp.controller('PreparationCtrl', function ($scope,$routeParams,Din
     var numberOfGuests = Dinner.getNumberOfGuests();
     var i;
     $scope.detail = [];
-    $scope.fullMenuDetail = Dinner.getFullMenuDetail();
+    $scope.fullMenuDetail = Dinner.getFullMenuDetailForPreparation();
     for (i = 0; i < $scope.fullMenuDetail.length; i++) {
       var detailInner = [];
       detailInner.push($scope.fullMenuDetail[i][3]);

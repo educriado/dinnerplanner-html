@@ -65,14 +65,6 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     },
   });
 
-  // this.getMenuCookie = function() {
-  //   var cookieContent = $cookieStore.get('FullMenuDetail');
-  //   if (cookieContent == null) {
-  //     cookieContent = [];
-  //   }
-  //   return cookieContent;
-  // };
-
   this.setCurrentType = function(dishType) {
     this.currentType = dishType;
   };
@@ -169,59 +161,6 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     return allDishes;
   };
 
-  // this.getFullMenuDetail = function() {
-  //   this.detail = $cookieStore.get('LeftMenuDetail');
-  //   $cookieStore.remove('LeftMenuDetail');
-  //   if(this.detail == null || this.detail == undefined){
-  //     this.detail = [];
-  //   }
-  //   for(i = 0; i < this.detail.length; i++){
-  //     if(this.fullMenu.indexOf(this.detail[i][0]) === -1){
-  //       this.addDishToMenu(this.detail[i][0]);
-  //     }
-  //     this.detail = [];
-  //   }
-  //   for (i = 0; i < this.fullMenuDetail.length; i++) {
-  //     var detailInner = [];
-  //     detailInner.push(this.fullMenuDetail[i][0]);
-  //     detailInner.push(this.fullMenuDetail[i][4]);
-  //     detailInner.push(this.fullMenuDetail[i][1]);
-  //     this.detail.push(detailInner);
-  //   }
-  //     $cookieStore.put('LeftMenuDetail', this.detail);
-  //     return this.detail;
-  // }
-
-  // this.getFullMenuDetail = function() {
-  //   console.log('Getting full menu details.');
-  //   var fullDetailIs = this.getMenuCookie();
-  //   this.detail = [];
-  //   var i;
-  //   for (i = 0; i < fullDetailIs.length; i++) {
-  //     var detailInner = [];
-  //     detailInner.push(fullDetailIs[i][0]);
-  //     detailInner.push(fullDetailIs[i][4]);
-  //     detailInner.push(fullDetailIs[i][1]);
-  //     this.detail.push(detailInner);
-  //   }
-  //   return this.detail;
-  // };
-
-  //this.getFullMenuDetailonLoad = function() {
-
-  //}
-  // this.detail = [];
-  // var i;
-  // for (i = 0; i < this.fullMenuDetail.length; i++) {
-  //   var detailInner = [];
-  //   detailInner.push(this.fullMenuDetail[i][0]);
-  //   detailInner.push(this.fullMenuDetail[i][4]);
-  //   detailInner.push(this.fullMenuDetail[i][1]);
-  //   this.detail.push(detailInner);
-  // }
-  // return this.detail;
-  // };
-
   this.getFullMenuDetail = function() {
     this.detail = [];
     for (var i = 0; i < this.fullMenuDetail.length; i++) {
@@ -234,29 +173,9 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     return this.detail;
   };
 
-  // this.addDishFromCookie = function (id, keyType) {
-  //   var dishInfo = [];
-  //   var detailAPI = [];
-  //   var type = this.typeDish[keyType];
-  //   this.Dish.get({id:id},function(data){
-  //     var price = 0;
-  //     var instructions=data.analyzedInstructions[0].steps;
-  //     for(var key in instructions){
-  //       price++;
-  //     }
-  //     dishInfo.push(id);
-  //     dishInfo.push(data.title);
-  //     dishInfo.push(type);
-  //     dishInfo.push(data.image);
-  //     dishInfo.push(price);
-  //     dishInfo.push(instructions);
-  //     var result = setFullMenuDetail(dishInfo);
-  //   },function(data){
-  //     alert("There was an error.");
-  //   });
-  //   return 1 ;
-  //   // this.fullMenuDetail.push(menuDetail);
-  // }
+  this.getFullMenuDetailForPreparation = function() {
+      return this.fullMenuDetail;
+  };
 
   var setFullMenuDetail = function(dishInfo) {
     _self.fullMenuDetail.push(dishInfo);
@@ -313,48 +232,6 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
     totalPrice = totalPrice * this.getNumberOfGuests();
     return totalPrice;
   };
-
-  // this.addDishToMenu = function(id) {
-  //   // Check same type (this includes same dish)
-  //   var index;
-  //   var added = false;
-  //   for (index = 0; index < this.fullMenu.length; this.fullMenu++) {
-  //     if (this.fullMenuDetail[index][2] === this.currentType) {
-  //       // Same type as some dish, remove and add new one
-  //       this.removeDishFromMenu(this.fullMenu[index]);
-  //       // Add ID
-  //       this.fullMenu.push(id);
-  //       // Add details
-  //       this.fullMenuDetail.push([id, this.currentDishName, this.currentType, this.currentDishImage,
-  //         this.currentPrice, this.currentInstruction
-  //       ]);
-  //       // Handle cookies
-  //       $cookieStore.remove('FullMenu');
-  //       $cookieStore.put('FullMenu', this.fullMenu);
-  //       $cookieStore.remove('FullMenuDetail');
-  //       $cookieStore.put('FullMenuDetail', this.fullMenuDetail);
-  //       added = true;
-  //       console.log('Replaced same type dish, new one: ' + id);
-  //     }
-  //   }
-  //   // Didn't find same type or empty menu, just add
-  //   if (added === false) {
-  //     console.log('Dish wasnt present/empty menu, adding.');
-  //     // Add ID
-  //     this.fullMenu.push(id);
-  //     // Add details
-  //     this.fullMenuDetail.push([id, this.currentDishName, this.currentType, this.currentDishImage,
-  //       this.currentPrice, this.currentInstruction
-  //     ]);
-  //     // Handle cookies
-  //     $cookieStore.remove('FullMenu');
-  //     $cookieStore.put('FullMenu', this.fullMenu);
-  //     $cookieStore.remove('FullMenuDetail');
-  //     $cookieStore.put('FullMenuDetail', this.fullMenuDetail);
-  //     console.log('Added dish to menu: ' + id);
-  //   }
-  // }
-
 
   this.addDishToMenu = function(id) {
     //TODO use $cookieStore to save info about the menu
@@ -439,9 +316,6 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
         this.typeDish = $cookieStore.get('TypeDish');
         for (var i = 0; i < this.fullMenuCookieAllIds.length; i++) {
           var id = this.fullMenuCookieAllIds[i];
-          // this.fullMenu.push(this.fullMenuCookieAllIds[i]);
-          // var result = this.addDishFromCookie(this.fullMenu[i], i);
-          // var dishInfo = [];
           var detailAPI = [];
           var type = this.typeDish[i];
           this.Dish.get({ id: id }, function(data) {
@@ -460,10 +334,8 @@ dinnerPlannerApp.factory('Dinner', function($resource, $cookieStore) {
             dishInfo.push(price);
             dishInfo.push(instructions);
             console.log(dishInfo);
-            // setFullMenuDetail(dishInfo);
             _self.fullMenuDetail.push(dishInfo);
             console.log(_self.fullMenuDetail);
-            // var result = setFullMenuDetail(dishInfo);
             _self.fullMenu.push(id);
             if(_self.fullMenu.length === _self.fullMenuCookieAllIds.length){
               console.log(_self.fullMenuDetail);
