@@ -28,9 +28,9 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
     for (i = 0; i < $scope.fullMenuDetail.length; i++) {
       var detailInner = [];
       detailInner.push($scope.fullMenuDetail[i][0]);
-      detailInner.push($scope.fullMenuDetail[i][4] * numberOfGuest);
-      $scope.cost += $scope.fullMenuDetail[i][4] * numberOfGuest;
-      detailInner.push($scope.fullMenuDetail[i][1]);
+      detailInner.push($scope.fullMenuDetail[i][1] * numberOfGuest);
+      $scope.cost += $scope.fullMenuDetail[i][1] * numberOfGuest;
+      detailInner.push($scope.fullMenuDetail[i][2]);
       $scope.detail.push(detailInner);
     }
   };

@@ -5,9 +5,12 @@
 // the next time.
 dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
 
-  this.numberOfGuest = 4;
-  $cookieStore.put('numberOfGuest', this.numberOfGuest);
-
+  // $cookieStore.put('numberOfGuest', 4)
+  this.numberOfGuest = $cookieStore.get('numberOfGuest');
+  if (this.numberOfGuest == null) {
+    this.numberOfGuest = 4;
+    $cookieStore.put('numberOfGuest', this.numberOfGuest);
+  }
 
   this.setNumberOfGuests = function(num) {
     this.numberOfGuest = num;
@@ -15,8 +18,11 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   };
 
   this.getNumberOfGuests = function() {
+    console.log('Return cookie.');
     return $cookieStore.get('numberOfGuest');
   };
+
+  this.detail = [];
 
 
   // TODO in Lab 5: Add your model code from previous labs
@@ -51,7 +57,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   this.fullMenuDetail = [];
   this.observers = [];
   this.currentSelectedDish = 0;
-  this.currentType = "";
+  this.currentType = "Dessert";
   this.currentDishImage = "";
   this.currentDishName = "";
   this.currentPrice = 0;
@@ -215,7 +221,26 @@ dinnerPlannerApp.factory('Dinner',function ($resource, $cookieStore) {
   };
 
   this.getFullMenuDetail = function() {
-      return this.fullMenuDetail;
+    this.detail = $cookieStore.get('LeftMenuDetail');
+    $cookieStore.remove('LeftMenuDetail');
+    if(this.detail == null || this.detail == undefined){
+      this.detail = [];
+    }
+    for(i = 0; i < this.detail.length; i++){
+      if(this.fullMenu.indexOf(this.detail[i][0]) === -1){
+        this.addDishToMenu(this.detail[i][0]);
+      }
+      this.detail = [];
+    }
+    for (i = 0; i < this.fullMenuDetail.length; i++) {
+      var detailInner = [];
+      detailInner.push(this.fullMenuDetail[i][0]);
+      detailInner.push(this.fullMenuDetail[i][4]);
+      detailInner.push(this.fullMenuDetail[i][1]);
+      this.detail.push(detailInner);
+    }
+      $cookieStore.put('LeftMenuDetail', this.detail);
+      return this.detail;
   }
 
   //Returns all ingredients for all the dishes on the menu.
